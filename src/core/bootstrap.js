@@ -15,10 +15,12 @@ import {
 } from '@/store/mutation-types'
 import config from '@/config/defaultSettings'
 
+// 初始化参数等
 export default function Initializer () {
   console.log(`API_URL: ${process.env.VUE_APP_API_BASE_URL}`)
-
+  // 侧边栏的类型
   store.commit('SET_SIDEBAR_TYPE', Vue.ls.get(SIDEBAR_TYPE, true))
+  // 主题
   store.commit('TOGGLE_THEME', Vue.ls.get(DEFAULT_THEME, config.navTheme))
   store.commit('TOGGLE_LAYOUT_MODE', Vue.ls.get(DEFAULT_LAYOUT_MODE, config.layout))
   store.commit('TOGGLE_FIXED_HEADER', Vue.ls.get(DEFAULT_FIXED_HEADER, config.fixedHeader))
@@ -28,6 +30,7 @@ export default function Initializer () {
   store.commit('TOGGLE_WEAK', Vue.ls.get(DEFAULT_COLOR_WEAK, config.colorWeak))
   store.commit('TOGGLE_COLOR', Vue.ls.get(DEFAULT_COLOR, config.primaryColor))
   store.commit('TOGGLE_MULTI_TAB', Vue.ls.get(DEFAULT_MULTI_TAB, config.multiTab))
+  // 用户相关
   store.commit('SET_TOKEN', Vue.ls.get(ACCESS_TOKEN))
 
   // last step
