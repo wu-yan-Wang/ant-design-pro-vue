@@ -1,28 +1,294 @@
 ```
-├── public
-│   └── logo.png             # LOGO
-|   └── index.html           # Vue 入口模板
-├── src
-│   ├── api                  # Api ajax 等
-│   ├── assets               # 本地静态资源
-│   ├── config               # 项目基础配置，包含路由，全局设置
-│   ├── components           # 业务通用组件
-        |——
-│   ├── core                 # 项目引导, 全局配置初始化，依赖包引入等
-│   ├── router               # Vue-Router
-│   ├── store                # Vuex
-│   ├── utils                # 工具库
-│   ├── locales              # 国际化资源
-│   ├── views                # 业务页面入口和常用模板
-│   ├── App.vue              # Vue 模板入口
-│   └── main.js              # Vue 入口 JS
-│   └── permission.js        # 路由守卫(路由权限控制)
-├── tests                    # 测试工具
-├── README.md
-└── package.json
-```
-
-```
-├── build // webpack配置文件 ├── config // 项目打包路径 ├── elm // 上线项目文件，放在服务器即可正常访问 ├── screenshots // 项目截图 ├── src // 源码目录 │ ├── components // 组件 │ │ ├── common // 公共组件 │ │ │ ├── alertTip.vue // 弹出框组件 │ │ │ ├── buyCart.vue // 购物车组件 │ │ │ ├── computeTime.vue // 倒计时组件 │ │ │ ├── loading.vue // 页面初始化加载数据的动画组件 │ │ │ ├── mixin.js // 组件混合(包括：指令-下拉加载更多，处理图片地址) │ │ │ ├── ratingStar.vue // 评论的五颗星组件 │ │ │ └── shoplist.vue // msite和shop页面的餐馆列表公共组件 │ │ ├── footer │ │ │ └── footGuide.vue // 底部公共组件 │ │ └── header │ │ └── head.vue // 头部公共组件 │ ├── config // 基本配置 │ │ ├── env.js // 环境切换配置 │ │ ├── fetch.js // 获取数据 │ │ ├── mUtils.js // 常用的js方法 │ │ └── rem.js // px转换rem │ ├── images // 公共图片 │ ├── page │ │ ├── balance │ │ │ ├── balance.vue // 余额页 │ │ │ └── children │ │ │ └── detail.vue // 余额说明 │ │ ├── benefit │ │ │ ├── benefit.vue // 红包页 │ │ │ └── children │ │ │ ├── commend.vue // 推荐有奖 │ │ │ ├── coupon.vue // 代金券说明 │ │ │ ├── exchange.vue // 兑换红包 │ │ │ ├── hbDescription.vue // 红包说明 │ │ │ └── hbHistory.vue // 历史红包 │ │ ├── city
-│ │ │ └── city.vue // 当前城市页 │ │ ├── confirmOrder │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ ├── addAddress.vue // 添加地址页 │ │ │ │ │ └── children │ │ │ │ │ └── searchAddress.vue // 搜索地址页 │ │ │ │ ├── chooseAddress.vue // 选择地址页 │ │ │ │ ├── invoice.vue // 选择发票页 │ │ │ │ ├── payment.vue // 付款页 │ │ │ │ ├── remark.vue // 订单备注页 │ │ │ │ └── userValidation.vue // 用户验证页 │ │ │ └── confirmOrder.vue // 确认订单页 │ │ ├── download │ │ │ └── download.vue // 下载App │ │ ├── find │ │ │ └── find.vue // 发现页 │ │ ├── food │ │ │ └── food.vue // 食品筛选排序页 │ │ ├── forget │ │ │ └── forget.vue // 忘记密码，修改密码页 │ │ ├── home │ │ │ └── home.vue // 首页 │ │ ├── login │ │ │ └── login.vue // 登录注册页 │ │ ├── msite │ │ │ └── msite.vue // 商铺列表页 │ │ ├── order │ │ │ ├── children │ │ │ │ └── orderDetail.vue // 订单详情页 │ │ │ └── order.vue // 订单列表页 │ │ ├── points │ │ │ ├── children │ │ │ │ └── detail.vue // 积分说明 │ │ │ └── points.vue // 积分页 │ │ ├── profile │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ ├── address.vue // 地址 │ │ │ │ │ └── children │ │ │ │ │ ├── add.vue // 新增地址 │ │ │ │ │ └── children │ │ │ │ │ └── addDetail.vue // 搜索地址 │ │ │ │ ├── info.vue // 帐户信息 │ │ │ │ └── setusername.vue // 重置用户名 │ │ │ └── profile.vue // 个人中心 │ │ ├── search │ │ │ └── search.vue // 搜索页 │ │ ├── service │ │ │ ├── children │ │ │ │ └── questionDetail.vue // 问题详情 │ │ │ └── service.vue // 服务中心 │ │ ├── shop │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ └── shopSafe.vue // 商铺认证信息页 │ │ │ │ ├── foodDetail.vue // 商铺信息页 │ │ │ │ └── shopDetail.vue // 单个商铺信息页 │ │ │ └── shop.vue // 商铺筛选页 │ │ └── vipcard │ │ ├── children │ │ │ ├── invoiceRecord.vue // 购买记录 │ │ │ ├── useCart.vue // 使用卡号购买 │ │ │ └── vipDescription.vue // 会员说明 │ │ └── vipcard.vue // 会员卡办理页 │ ├── plugins // 引用的插件 │ ├── router │ │ └── router.js // 路由配置 │ ├── service // 数据交互统一调配 │ │ ├── getData.js // 获取数据的统一调配文件，对接口进行统一管理 │ │ └── tempdata // 开发阶段的临时数据 │ ├── store // vuex的状态管理 │ │ ├── action.js // 配置actions │ │ ├── getters.js // 配置getters │ │ ├── index.js // 引用vuex，创建store │ │ ├── modules // store模块 │ │ ├── mutation-types.js // 定义常量muations名 │ │ └── mutations.js // 配置mutations │ └── style │ ├── common.scss // 公共样式文件 │ ├── mixin.scss // 样式配置文件 │ └── swiper.min.css │ ├── App.vue // 页面入口文件 │ ├── main.js // 程序入口文件，加载各种公共组件 ├── favicon.ico // 图标 ├── index.html // 入口html文件
+config
+└── plugin.config.js          # 用于样式
+public 
+├── avatar2.jpg
+├── index.html                # Vue 入口模板 提供了默认的loading优化 默认使用了一套模板
+├── loading                   # 提供了loading的样式共俩套模板
+│   ├── loading.css
+│   ├── loading.html
+│   └── option2
+│       ├── html_code_segment.html
+│       ├── loading.css
+│       └── loading.svg
+└── logo.png
+src
+├── App.vue                   # vue挂载所用的模板
+├── api                       # mock js
+│   ├── index.js
+│   ├── login.js
+│   └── manage.js
+├── assets
+│   ├── background.svg
+│   ├── icons
+│   │   └── bx-analyse.svg
+│   ├── logo.png
+│   └── logo.svg
+├── components
+│   ├── ArticleListContent
+│   │   ├── ArticleListContent.vue
+│   │   └── index.js
+│   ├── AvatarList
+│   │   ├── Item.vue
+│   │   ├── List.vue
+│   │   ├── index.js
+│   │   ├── index.less
+│   │   └── index.md
+│   ├── Charts
+│   │   ├── Bar.vue
+│   │   ├── ChartCard.vue
+│   │   ├── Liquid.vue
+│   │   ├── MiniArea.vue
+│   │   ├── MiniBar.vue
+│   │   ├── MiniProgress.vue
+│   │   ├── MiniSmoothArea.vue
+│   │   ├── Radar.vue
+│   │   ├── RankList.vue
+│   │   ├── TagCloud.vue
+│   │   ├── TransferBar.vue
+│   │   ├── Trend.vue
+│   │   ├── chart.less
+│   │   └── smooth.area.less
+│   ├── CountDown
+│   │   ├── CountDown.vue
+│   │   ├── index.js
+│   │   └── index.md
+│   ├── DescriptionList
+│   │   ├── DescriptionList.vue
+│   │   └── index.js
+│   ├── Editor
+│   │   ├── QuillEditor.vue
+│   │   └── WangEditor.vue
+│   ├── Ellipsis
+│   │   ├── Ellipsis.vue
+│   │   ├── index.js
+│   │   └── index.md
+│   ├── Exception
+│   │   ├── ExceptionPage.vue
+│   │   ├── index.js
+│   │   └── type.js
+│   ├── FooterToolbar
+│   │   ├── FooterToolBar.vue
+│   │   ├── index.js
+│   │   ├── index.less
+│   │   └── index.md
+│   ├── GlobalFooter
+│   │   ├── GlobalFooter.vue
+│   │   └── index.js
+│   ├── GlobalHeader
+│   │   ├── GlobalHeader.vue
+│   │   └── index.js
+│   ├── IconSelector
+│   │   ├── IconSelector.vue
+│   │   ├── README.md
+│   │   ├── icons.js
+│   │   └── index.js
+│   ├── Menu
+│   │   ├── SideMenu.vue
+│   │   ├── index.js
+│   │   ├── menu.js
+│   │   └── menu.render.js
+│   ├── MultiTab
+│   │   ├── MultiTab.vue
+│   │   ├── events.js
+│   │   ├── index.js
+│   │   └── index.less
+│   ├── NProgress
+│   │   └── nprogress.less
+│   ├── NoticeIcon
+│   │   ├── NoticeIcon.vue
+│   │   └── index.js
+│   ├── NumberInfo
+│   │   ├── NumberInfo.vue
+│   │   ├── index.js
+│   │   ├── index.less
+│   │   └── index.md
+│   ├── PageHeader
+│   │   ├── PageHeader.vue
+│   │   └── index.js
+│   ├── PageLoading
+│   │   └── index.jsx
+│   ├── Result
+│   │   ├── Result.vue
+│   │   └── index.js
+│   ├── Search
+│   │   ├── GlobalSearch.jsx
+│   │   └── index.less
+│   ├── SettingDrawer
+│   │   ├── SettingDrawer.vue
+│   │   ├── SettingItem.vue
+│   │   ├── index.js
+│   │   ├── settingConfig.js
+│   │   └── themeColor.js
+│   ├── StandardFormRow
+│   │   ├── StandardFormRow.vue
+│   │   └── index.js
+│   ├── Table
+│   │   ├── README.md
+│   │   └── index.js
+│   ├── TagSelect
+│   │   ├── TagSelectOption.jsx
+│   │   └── index.jsx
+│   ├── TextArea
+│   │   ├── index.jsx
+│   │   └── style.less
+│   ├── Tree
+│   │   └── Tree.jsx
+│   ├── Trend
+│   │   ├── Trend.vue
+│   │   ├── index.js
+│   │   ├── index.less
+│   │   └── index.md
+│   ├── _util
+│   │   └── util.js
+│   ├── global.less
+│   ├── index.js
+│   ├── index.less
+│   └── tools
+│       ├── Breadcrumb.vue
+│       ├── DetailList.vue
+│       ├── HeadInfo.vue
+│       ├── LangSelect.vue
+│       ├── Logo.vue
+│       ├── TwoStepCaptcha.vue
+│       ├── UserMenu.vue
+│       └── index.js
+├── config
+│   ├── defaultSettings.js
+│   └── router.config.js
+├── core
+│   ├── bootstrap.js
+│   ├── directives
+│   │   └── action.js
+│   ├── icons.js
+│   ├── lazy_lib
+│   │   └── components_use.js
+│   └── lazy_use.js
+├── layouts
+│   ├── BasicLayout.vue
+│   ├── BlankLayout.vue
+│   ├── PageView.vue
+│   ├── RouteView.vue
+│   ├── UserLayout.vue
+│   └── index.js
+├── main.js
+├── mock
+│   ├── index.js
+│   ├── services
+│   │   ├── article.js
+│   │   ├── auth.js
+│   │   ├── manage.js
+│   │   ├── other.js
+│   │   ├── tagCloud.js
+│   │   └── user.js
+│   └── util.js
+├── permission.js
+├── router
+│   ├── README.md
+│   ├── generator-routers.js
+│   └── index.js
+├── store
+│   ├── getters.js
+│   ├── index.js
+│   ├── modules
+│   │   ├── app.js
+│   │   ├── async-router.js
+│   │   ├── permission.js
+│   │   └── user.js
+│   └── mutation-types.js
+├── utils
+│   ├── axios.js
+│   ├── device.js
+│   ├── domUtil.js
+│   ├── filter.js
+│   ├── helper
+│   │   └── permission.js
+│   ├── mixin.js
+│   ├── permissions.js
+│   ├── request.js
+│   ├── util.js
+│   └── utils.less
+└── views
+    ├── 404.vue
+    ├── Home.vue
+    ├── account
+    │   ├── center
+    │   │   ├── Index.vue
+    │   │   └── page
+    │   │       ├── App.vue
+    │   │       ├── Article.vue
+    │   │       ├── Project.vue
+    │   │       └── index.js
+    │   └── settings
+    │       ├── AvatarModal.vue
+    │       ├── BaseSetting.vue
+    │       ├── Binding.vue
+    │       ├── Custom.vue
+    │       ├── Index.vue
+    │       ├── Notification.vue
+    │       └── Security.vue
+    ├── dashboard
+    │   ├── Analysis.vue
+    │   ├── Monitor.vue
+    │   ├── TestWork.vue
+    │   └── Workplace.vue
+    ├── exception
+    │   ├── 403.vue
+    │   ├── 404.vue
+    │   └── 500.vue
+    ├── form
+    │   ├── BasicForm.vue
+    │   ├── advancedForm
+    │   │   ├── AdvancedForm.vue
+    │   │   ├── RepositoryForm.vue
+    │   │   └── TaskForm.vue
+    │   └── stepForm
+    │       ├── Step1.vue
+    │       ├── Step2.vue
+    │       ├── Step3.vue
+    │       └── StepForm.vue
+    ├── list
+    │   ├── CardList.vue
+    │   ├── QueryList.vue
+    │   ├── StandardList.vue
+    │   ├── TableList.vue
+    │   ├── modules
+    │   │   ├── CreateForm.vue
+    │   │   ├── StepByStepModal.vue
+    │   │   └── TaskForm.vue
+    │   ├── search
+    │   │   ├── Applications.vue
+    │   │   ├── Article.vue
+    │   │   ├── Projects.vue
+    │   │   ├── SearchLayout.vue
+    │   │   └── components
+    │   │       ├── CardInfo.vue
+    │   │       └── IconText.vue
+    │   └── table
+    │       ├── Edit.vue
+    │       └── List.vue
+    ├── other
+    │   ├── IconSelectorView.vue
+    │   ├── PermissionList.vue
+    │   ├── RoleList.vue
+    │   ├── TableInnerEditList.vue
+    │   ├── TreeList.vue
+    │   ├── UserList.vue
+    │   └── modules
+    │       ├── OrgModal.vue
+    │       └── RoleModal.vue
+    ├── profile
+    │   ├── advanced
+    │   │   └── Advanced.vue
+    │   └── basic
+    │       └── Index.vue
+    ├── result
+    │   ├── Error.vue
+    │   └── Success.vue
+    ├── role
+    │   └── RoleList.vue
+    └── user
+        ├── Login.vue
+        ├── Register.vue
+        └── RegisterResult.vue
 ```

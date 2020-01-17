@@ -1,7 +1,12 @@
-// eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
 import { bxAnaalyse } from '@/core/icons'
 
+/**
+ * 用户动态路由
+ * 在permission.js中路由前置里用户登录成功后动态通过store中的方法和基础路由拼接
+ * 并且添加到vue-route中
+ * @type { *[] }
+ */
 export const asyncRouterMap = [
 
   {
