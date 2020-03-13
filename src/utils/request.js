@@ -49,6 +49,7 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
+  console.log('response', response)
   return response.data
 }, err)
 

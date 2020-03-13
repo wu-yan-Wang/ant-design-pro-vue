@@ -3,7 +3,7 @@ config
 └── plugin.config.js          # 用于样式
 public 
 ├── avatar2.jpg
-├── index.html                # Vue 入口模板 提供了默认的loading优化 默认使用了一套模板
+├── index.html                # Vue 入口模板 提供了默认的loading优化 默认使用了一套模板 会在vue初始化后替换掉id为app的内容
 ├── loading                   # 提供了loading的样式共俩套模板
 │   ├── loading.css
 │   ├── loading.html

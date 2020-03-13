@@ -110,7 +110,6 @@ export default {
       pageSize: this.pageSize,
       showSizeChanger: this.showSizeChanger
     }) || false
-    console.log('this.localPagination', this.localPagination)
     this.needTotalList = this.initTotalList(this.columns)
     this.loadData()
   },
@@ -280,7 +279,6 @@ export default {
       if (k === 'rowSelection') {
         if (showAlert && this.rowSelection) {
           // 如果需要使用alert，则重新绑定 rowSelection 事件
-          console.log('this.rowSelection', this.rowSelection)
           props[k] = {
             ...this.rowSelection,
             selectedRows: this.selectedRows,
@@ -300,6 +298,7 @@ export default {
       this[k] && (props[k] = this[k])
       return props[k]
     })
+
     const table = (
       <a-table {...{ props, scopedSlots: { ...this.$scopedSlots } }} onChange={this.loadData}>
         { Object.keys(this.$slots).map(name => (<template slot={name}>{this.$slots[name]}</template>)) }

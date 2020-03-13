@@ -16,6 +16,23 @@ export const asyncRouterMap = [
     meta: { title: '首页' },
     redirect: '/dashboard/workplace',
     children: [
+      // 系统管理
+      {
+        path: '/system/list',
+        name: 'system-list',
+        meta: { title: '系统管理', icon: 'table' },
+        component: PageView,
+        redirect: '/list/user-list',
+        children: [
+          {
+            path: '/list/user-list/:pageNo([1-9]\\d*)?',
+            name: 'userList',
+            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            component: () => import('@/views/system/user/UserList'),
+            meta: { title: '人员管理', keepAlive: true, permission: ['table'] }
+          }
+        ]
+      },
       // dashboard
       {
         path: '/dashboard',
