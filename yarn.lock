@@ -1975,10 +1975,10 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ant-design-vue@1.4.11:
-  version "1.4.11"
-  resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.4.11.tgz#a1a277c164301182b2d472ab5900054b85d6cbb8"
-  integrity sha1-oaJ3wWQwEYKy1HKrWQAFS4XWy7g=
+ant-design-vue@^1.5.0:
+  version "1.5.0-rc.4"
+  resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.5.0-rc.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fant-design-vue%2Fdownload%2Fant-design-vue-1.5.0-rc.4.tgz#01d9424c081468295cd0a588227a86c8a59d5b77"
+  integrity sha1-AdlCTAgUaClc0KWIInqGyKWdW3c=
   dependencies:
     "@ant-design/icons" "^2.1.1"
     "@ant-design/icons-vue" "^2.0.0"
@@ -1989,11 +1989,12 @@ ant-design-vue@1.4.11:
     babel-runtime "6.x"
     classnames "^2.2.5"
     component-classes "^1.2.6"
-    dom-align "^1.7.0"
+    dom-align "^1.10.4"
     dom-closest "^0.2.0"
     dom-scroll-into-view "^2.0.0"
     enquire.js "^2.1.6"
     intersperse "^1.0.0"
+    is-mobile "^2.2.1"
     is-negative-zero "^2.0.0"
     ismobilejs "^1.0.0"
     json2mq "^0.2.0"
@@ -4121,10 +4122,10 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-dom-align@^1.7.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/dom-align/-/dom-align-1.8.0.tgz#c0e89b5b674c6e836cd248c52c2992135f093654"
-  integrity sha512-B85D4ef2Gj5lw0rK0KM2+D5/pH7yqNxg2mB+E8uzFaolpm7RQmsxEfjyEuNiF8UBBkffumYDeKRzTzc3LePP+w==
+dom-align@^1.10.4:
+  version "1.11.0"
+  resolved "https://registry.npm.taobao.org/dom-align/download/dom-align-1.11.0.tgz#209c6f50bf8140b89311574389e5cf9283a0c0c0"
+  integrity sha1-IJxvUL+BQLiTEVdDieXPkoOgwMA=
 
 dom-closest@^0.2.0:
   version "0.2.0"
@@ -6034,6 +6035,11 @@ is-glob@^4.0.0, is-glob@^4.0.1:
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
   dependencies:
     is-extglob "^2.1.1"
+
+is-mobile@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npm.taobao.org/is-mobile/download/is-mobile-2.2.1.tgz?cache=0&sync_timestamp=1581934028185&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-mobile%2Fdownload%2Fis-mobile-2.2.1.tgz#10f2320012c410cc285feecb13406bd586f1b2f8"
+  integrity sha1-EPIyABLEEMwoX+7LE0Br1Ybxsvg=
 
 is-negative-zero@^2.0.0:
   version "2.0.0"

@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    getDictType({ dictType: 'sex' }).then(({ result }) => {
+    getDictType({ dictType: this.dictType }).then(({ result }) => {
       this.dictList = result || []
     })
   },
@@ -25,7 +25,8 @@ export default {
     placeholder: {
       type: String,
       default: '请选择'
-    }
+    },
+    dictType: String
   }),
   model: {
     prop: 'value',

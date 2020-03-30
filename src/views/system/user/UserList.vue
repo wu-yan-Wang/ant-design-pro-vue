@@ -1,32 +1,70 @@
 <template>
   <a-card :bordered="false">
     <more-page-search>
-      <a-col :md="8" :sm="24">
+      <a-col
+        :md="8"
+        :sm="24"
+      >
         <a-form-item label="姓名">
           <a-input v-model="queryParam.name"></a-input>
         </a-form-item>
       </a-col>
-      <a-col :md="8" :sm="24">
+      <a-col
+        :md="8"
+        :sm="24"
+      >
         <a-form-item label="手机号">
           <a-input v-model="queryParam.mobilePhone"></a-input>
         </a-form-item>
       </a-col>
       <template v-slot:hide-ele>
-        <a-col :md="8" :sm="24">
+        <a-col
+          :md="8"
+          :sm="24"
+        >
           <a-form-item label="身份证号">
             <a-input v-model="queryParam.idCard"></a-input>
           </a-form-item>
         </a-col>
       </template>
       <template v-slot:table-btn>
-        <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
-        <a-button style="margin-left: 8px" @click="()=>queryParam={}">重置</a-button>
+        <a-button
+          type="primary"
+          @click="$refs.table.refresh(true)"
+        >查询</a-button>
+        <a-button
+          style="margin-left: 8px"
+          @click="()=>queryParam={}"
+        >重置</a-button>
       </template>
     </more-page-search>
 
     <div class="table-operator">
-      <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
-      <a-button type="danger" icon="delete">删除</a-button>
+      <a-button
+        type="primary"
+        icon="plus"
+        @click="$refs.createModal.add()"
+      >新建</a-button>
+      <a-button
+        type="danger"
+        icon="delete"
+      >删除</a-button>
+      <a-dropdown>
+        <a-menu slot="overlay">
+          <a-menu-item
+            key="1"
+            @click="$refs.addAuth.add()"
+          >
+            <a-icon type="safety" />授权</a-menu-item>
+          <!-- lock | unlock -->
+          <a-menu-item key="2">
+            <a-icon type="lock" />启用</a-menu-item>
+        </a-menu>
+        <a-button style="margin-left: 8px">
+          批量操作
+          <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
     </div>
     <s-table
       ref="table"
@@ -38,21 +76,37 @@
       :data="loadData"
       showPagination="auto"
     >
+      <span
+        slot="serial"
+        slot-scope="text, record,index"
+      >
+        {{ index+1 }}
+      </span>
+      <span
+        slot="action"
+        slot-scope="text,record"
+      >
+        <a @click="handleEdit(record)">修改</a>
+      </span>
     </s-table>
-    <add-user ref="createModal" @ok="handleOk"></add-user>
+    <add-user
+      ref="createModal"
+      @ok="handleOk"
+    ></add-user>
+    <add-auth ref="addAuth"></add-auth>
   </a-card>
 </template>
 
 <script>
-import { STable, Ellipsism, MorePageSearch } from '@/components'
-import AddUser from './modules/AddUser'
+import { STable, MorePageSearch } from '@/components'
+import { AddAuth, AddUser } from './modules'
 import { getUserList } from '@/api/system/user'
+
 export default {
   data () {
     return {
       optionAlertShow: false,
       selectedRowKeys: [],
-      // custom table alert & rowSelection
       options: {
         alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
         rowSelection: {
@@ -67,23 +121,24 @@ export default {
           scopedSlots: { customRender: 'serial' }
         },
         {
-          title: '规则编号',
-          dataIndex: 'no'
+          title: '姓名',
+          dataIndex: 'name'
         },
         {
-          title: '描述',
-          dataIndex: 'description',
-          scopedSlots: { customRender: 'description' }
+          title: '账号',
+          dataIndex: 'account'
+        },
+        {
+          title: '手机号',
+          dataIndex: 'mobilePhone'
         },
         {
           title: '身份证',
           dataIndex: 'idCard'
         },
         {
-          title: '服务调用次数',
-          dataIndex: 'callNo',
-          sorter: true,
-          customRender: (text) => text + ' 次'
+          title: '性别',
+          dataIndex: 'sex'
         },
         {
           title: '状态',
@@ -124,13 +179,19 @@ export default {
     },
     onSelectChange (e) {
       console.log(e)
+    },
+    handleEdit (record) {
+      console.log(record)
+    },
+    handleDel (record) {
+      console.log(record)
     }
   },
   components: {
     MorePageSearch,
     STable,
-    Ellipsism,
-    AddUser
+    AddUser,
+    AddAuth
   }
 }
 </script>

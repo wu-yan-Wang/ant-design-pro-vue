@@ -17,6 +17,7 @@ if (process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 'tr
   require('./services/article')
   require('./services/system/user')
   require('./services/system/dict')
+  require('./services/system/role')
 
   Mock.setup({
     timeout: 800 // setter delay time

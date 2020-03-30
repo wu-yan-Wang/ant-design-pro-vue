@@ -8,39 +8,38 @@
     @cancel="handleCancel"
   >
     <a-spin :spinning="confirmLoading">
-      <a-form :form="form" class="form">
-        <a-row class="form-row" :gutter="16">
+      <a-form
+        :form="form"
+        class="form"
+      >
+        <a-row
+          class="form-row"
+          :gutter="16"
+        >
           <a-col v-bind="col3">
-            <a-form-item
-              label="账号"
-            >
+            <a-form-item label="账号">
               <a-input v-decorator="['account', {rules: [{required: true, min: 6 ,max:18, message: '账号必须在6~18位！'}]}]" />
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
-            <a-form-item
-              label="姓名"
-            >
+            <a-form-item label="姓名">
               <a-input v-decorator="['name', {rules: [{required: true, max: 6, message: '姓名最多输入五个字符！'}]}]" />
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
-            <a-form-item
-              label="性别"
-            >
+            <a-form-item label="性别">
               <dict-select
                 :allowClear="true"
-                placeholder="选择"
                 v-decorator="['sex', {
                   initialValue:data.sex,
                   rules: [{required: true, message: '请选择性别！'}]
-                }]"></dict-select>
+                }]"
+                dictType="sex"
+              ></dict-select>
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
-            <a-form-item
-              label="手机号"
-            >
+            <a-form-item label="手机号">
               <a-input
                 v-decorator="['mobilePhone',{
                   rules: [{required: true, max: 11,pattern:$enum('form.rule.phone') ,message: '请输入正确的手机号！'}]
@@ -106,5 +105,4 @@ export default {
 </script>
 
 <style>
-
 </style>
