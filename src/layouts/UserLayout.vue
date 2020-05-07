@@ -15,7 +15,7 @@
 
       <route-view></route-view>
 
-      <div class="footer">
+      <!-- <div class="footer">
         <div class="links">
           <a href="_self">帮助</a>
           <a href="_self">隐私</a>
@@ -24,7 +24,7 @@
         <div class="copyright">
           Copyright &copy; 2018 白鹭学园技术组出品
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -9,7 +9,8 @@ const user = {
     name: '',
     welcome: '',
     avatar: '',
-    roles: [],
+    menus: [],
+    actions: [],
     info: {}
   },
 
@@ -24,8 +25,11 @@ const user = {
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
+    SET_MENUS: (state, menus) => {
+      state.menus = menus
+    },
+    SET_ACTIONS: (state, actions) => {
+      state.actions = actions
     },
     SET_INFO: (state, info) => {
       state.info = info
@@ -37,10 +41,15 @@ const user = {
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
+          console.log('token', response)
           const result = response.result
-          Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result.token)
-          resolve()
+          if (response.code === 1) {
+            Vue.ls.set(ACCESS_TOKEN, result.token, 12 * 60 * 60 * 1000)
+            commit('SET_TOKEN', result.token)
+            resolve()
+          } else {
+            reject(response)
+          }
         }).catch(error => {
           reject(error)
         })
@@ -51,24 +60,19 @@ const user = {
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
+          console.log('userInfo', response)
           const result = response.result
-
-          if (result.role && result.role.permissions.length > 0) {
-            const role = result.role
-            role.permissions = result.role.permissions
-            role.permissions.map(per => {
-              if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
-                const action = per.actionEntitySet.map(action => { return action.action })
-                per.actionList = action
-              }
-            })
-            role.permissionList = role.permissions.map(permission => { return permission.permissionId })
-            commit('SET_ROLES', result.role)
+          if (result.menuList && result.menuList.length > 0) {
+            // 菜单
+            const menus = result.menuList
+            // 操作name
+            const actions = result.permissionList.map(v => v.permission)
+            commit('SET_MENUS', menus)
             commit('SET_INFO', result)
+            commit('SET_ACTIONS', actions)
           } else {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
-
           commit('SET_NAME', { name: result.name, welcome: welcome() })
           commit('SET_AVATAR', result.avatar)
 
@@ -82,13 +86,16 @@ const user = {
     // 登出
     Logout ({ commit, state }) {
       return new Promise((resolve) => {
-        logout(state.token).then(() => {
+        debugger
+        logout(state.token).then((res) => {
+          console.log('登出结果', res)
           resolve()
         }).catch(() => {
           resolve()
         }).finally(() => {
           commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
+          commit('SET_MENUS', [])
+          commit('SET_ACTIONS', [])
           Vue.ls.remove(ACCESS_TOKEN)
         })
       })
