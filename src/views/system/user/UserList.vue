@@ -69,7 +69,7 @@
     <s-table
       ref="table"
       size="default"
-      rowKey="key"
+      :rowKey="item=>item.id"
       :columns="columns"
       :alert="options.alert"
       :rowSelection="options.rowSelection"
