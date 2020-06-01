@@ -191,7 +191,7 @@ export default {
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
           Login(loginParams)
             .then((res) => this.loginSuccess(res))
-            .catch(err => this.requestFailed(err))
+            // .catch(err => this.requestFailed(err))
             .finally(() => {
               state.loginBtn = false
             })
@@ -268,8 +268,6 @@ export default {
       this.isLoginError = false
     },
     requestFailed (err) {
-      console.log(err)
-
       this.isLoginError = true
       this.$notification['error']({
         message: '错误',

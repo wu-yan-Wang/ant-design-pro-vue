@@ -5,6 +5,7 @@
     :width="600"
     :height="1000"
     @ok="handleSubmit"
+    :confirm-loading="loading"
     @cancel="handleCancel"
   >
     <a-tabs>
@@ -13,17 +14,13 @@
         key="role"
       >
         <transfer
-          :dataSource="roleData"
-          :targetKeys="roleTargetKeys"
-          :selectKeys="roleSelectedKeys"
-          :showSelectAll="false"
+          :data-source="roleData"
+          :target-keys="roleTargetKeys"
+          :select-keys="roleSelectedKeys"
+          :show-select-all="false"
           @change="handleChange"
           @selectChange="handleSelectChange"
-          :render="transferRender"
-          :listStyle="{
-            width: '250px',
-            height: '600px',
-          }"></transfer>
+          :render="item => item.description" />
       </a-tab-pane>
     </a-tabs>
   </a-modal>
@@ -31,42 +28,54 @@
 
 <script>
 import { Transfer } from 'ant-design-vue'
-import { getList } from '@/api/system/role'
+import { getList, haveRole, addUserRole } from '@/api/system/role'
 export default {
   data () {
     return {
       visible: false,
       roleData: [],
       roleTargetKeys: [],
-      roleSelectedKeys: []
+      roleSelectedKeys: [],
+      loading: false
     }
   },
-  created () {
-    getList().then((res) => {
-      console.log(res)
-      this.roleData = res.result
-    })
+  async created () {
+    const roles = await getList()
+    this.roleData = roles.result.map(item => ({
+      key: item.id,
+      title: item.roleName,
+      description: item.roleName,
+      disabled: false }))
+    const haves = await haveRole()
+    this.roleTargetKeys = haves.result.map(item => item.roleId)
   },
   methods: {
     add () {
       this.visible = true
     },
     handleSubmit () {
-
+      if (this.roleTargetKeys.length > 0) {
+        this.loading = true
+        const param = this.roleTargetKeys.map(item => ({ roleId: item }))
+        addUserRole(param).then(() => {
+          this.$message.success('赋权成功！')
+        }).finally(() => {
+          this.loading = false
+        })
+      } else {
+        this.$message.warning('请选择要赋权的角色！')
+      }
     },
     handleCancel () {
       this.visible = false
     },
-    handleChange (nextTargetKeys, direction, moveKeys) {
+    handleChange (nextTargetKeys) {
       this.roleTargetKeys = nextTargetKeys
-      console.log('targetKeys: ', nextTargetKeys)
-      console.log('direction: ', direction)
-      console.log('moveKeys: ', moveKeys)
+      console.log(nextTargetKeys)
     },
     handleSelectChange (sourceSelectedKeys, targetSelectedKeys) {
       this.roleSelectedKeys = [...sourceSelectedKeys, ...targetSelectedKeys]
-    },
-    transferRender: (item) => item.description
+    }
   },
   components: {
     Transfer

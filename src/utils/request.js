@@ -8,7 +8,7 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 // 创建 axios 实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL, // api base_url
-  timeout: 6000, // 请求超时时间
+  timeout: 60000, // 请求超时时间
   method: 'post',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
@@ -19,6 +19,8 @@ const err = (error) => {
   console.log(error)
 
   if (error.response) {
+    console.log(error.response)
+
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
     if (error.response.status === 403) {
@@ -26,8 +28,7 @@ const err = (error) => {
         message: 'Forbidden',
         description: data.message
       })
-    }
-    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
+    } else if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
       notification.error({
         message: 'Unauthorized',
         description: 'Authorization verification failed'
@@ -39,6 +40,11 @@ const err = (error) => {
           }, 1500)
         })
       }
+    } else {
+      notification.error({
+        message: data.error,
+        description: data.message
+      })
     }
   }
   return Promise.reject(error)
@@ -55,8 +61,14 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
-  console.log('response', response)
-  return response.data
+  const data = response.data
+  if (data.code === 0) {
+    notification.error({
+      message: data.message,
+      description: data.result
+    })
+  }
+  return data
 }, err)
 
 const installer = {

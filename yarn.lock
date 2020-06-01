@@ -1980,7 +1980,7 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ant-design-vue@^1.5.4:
+ant-design-vue@^1.6.1:
   version "1.6.1"
   resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.6.1.tgz#759de873b9017c92bb31937777ed8f65bd4f559c"
   integrity sha1-dZ3oc7kBfJK7MZN3d+2PZb1PVZw=

@@ -5,9 +5,11 @@ export default {
   },
   // 系统用户
   user: {
-    getUserList: 'system/sys-user/list'
+    getUserList: 'system/user/list'
   },
   role: {
-    getRoleList: 'system/role/list'
+    getRoleList: 'system/role/list',
+    haveRole: 'system/role/haveRole',
+    addUserRole: 'system/role/addUserRole'
   }
 }
