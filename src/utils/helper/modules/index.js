@@ -1,8 +1,8 @@
-import FORM_ENUM from './form-enum'
+import ROW_ENUM from './row-enum'
 
 import PERMISSION_ENUM from './permission-enum'
 
 export default {
-  form: FORM_ENUM,
+  row: ROW_ENUM,
   permission: PERMISSION_ENUM
 }

@@ -2,16 +2,14 @@
   <a-card :bordered="false">
     <more-page-search>
       <a-col
-        :md="8"
-        :sm="24"
+        v-bind="col"
       >
         <a-form-item label="姓名">
           <a-input v-model="queryParam.name"></a-input>
         </a-form-item>
       </a-col>
       <a-col
-        :md="8"
-        :sm="24"
+        v-bind="col"
       >
         <a-form-item label="手机号">
           <a-input v-model="queryParam.mobilePhone"></a-input>
@@ -19,8 +17,7 @@
       </a-col>
       <template v-slot:hide-ele>
         <a-col
-          :md="8"
-          :sm="24"
+          v-bind="col"
         >
           <a-form-item label="身份证号">
             <a-input v-model="queryParam.idCard"></a-input>
@@ -69,10 +66,10 @@
     <s-table
       ref="table"
       size="default"
-      rowKey="key"
+      row-key="id"
       :columns="columns"
       :alert="options.alert"
-      :rowSelection="options.rowSelection"
+      :row-selection="options.rowSelection"
       :data="loadData"
       showPagination="auto"
     >
@@ -105,6 +102,7 @@ import { getUserList } from '@/api/system/user'
 export default {
   data () {
     return {
+      col: this.$enum('row.col3'),
       optionAlertShow: false,
       selectedRowKeys: [],
       options: {

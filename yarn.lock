@@ -1980,10 +1980,10 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ant-design-vue@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.6.1.tgz#759de873b9017c92bb31937777ed8f65bd4f559c"
-  integrity sha1-dZ3oc7kBfJK7MZN3d+2PZb1PVZw=
+ant-design-vue@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.6.2.tgz#983634caac9cdaca0b3a095b540105b4f76da29f"
+  integrity sha1-mDY0yqyc2soLOglbVAEFtPdtop8=
   dependencies:
     "@ant-design/icons" "^2.1.1"
     "@ant-design/icons-vue" "^2.0.0"
@@ -11065,10 +11065,10 @@ vue-ref@^2.0.0:
   resolved "https://registry.npm.taobao.org/vue-ref/download/vue-ref-2.0.0.tgz?cache=0&sync_timestamp=1586427296439&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-ref%2Fdownload%2Fvue-ref-2.0.0.tgz#483084d732abed11da796778a8266a3af0ea1a9c"
   integrity sha1-SDCE1zKr7RHaeWd4qCZqOvDqGpw=
 
-vue-router@^3.1.2:
-  version "3.3.0"
-  resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.3.0.tgz#752905ef1ce210626834f6fa44e6fdcb11e4f262"
-  integrity sha1-dSkF7xziEGJoNPb6ROb9yxHk8mI=
+vue-router@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.3.2.tgz#0099de402edb2fe92f9711053ab5a2156f239cad"
+  integrity sha1-AJneQC7bL+kvlxEFOrWiFW8jnK0=
 
 vue-style-loader@^4.1.0:
   version "4.1.2"

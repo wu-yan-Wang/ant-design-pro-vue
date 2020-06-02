@@ -1,4 +1,4 @@
-const FORM_ENUM = {
+const ROW_ENUM = {
   col1: {
     md: { span: 24 },
     sm: { span: 24 }
@@ -20,4 +20,4 @@ const FORM_ENUM = {
   }
 }
 
-export default FORM_ENUM
+export default ROW_ENUM

@@ -68,7 +68,7 @@ export default {
       visible: false,
       confirmLoading: false,
       form: this.$form.createForm(this),
-      col3: this.$enum('form.col2'),
+      col3: this.$enum('row.col2'),
       data: {}
     }
   },
