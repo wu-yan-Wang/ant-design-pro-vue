@@ -1,3 +1,4 @@
+
 export default {
   // 字典
   dict: {
@@ -7,9 +8,15 @@ export default {
   user: {
     getUserList: 'system/user/list'
   },
+  // 角色
   role: {
     getRoleList: 'system/role/list',
     haveRole: 'system/role/haveRole',
     addUserRole: 'system/role/addUserRole'
+  },
+  // 菜单
+  permission: {
+    list: 'system/permission/list',
+    add: 'system/permission/add'
   }
 }
