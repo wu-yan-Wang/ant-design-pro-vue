@@ -1,6 +1,10 @@
 import { axios } from '@/utils/request'
 import api from './api'
 
-export function list (param) {
-  return axios.post(api.permission.list, param)
+export function list (parameter) {
+  return axios.post(api.permission.list, parameter)
+}
+
+export function treeList () {
+  return axios.post(api.permission.treeList)
 }

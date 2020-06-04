@@ -1,17 +1,19 @@
 <template>
   <a-card>
-    <s-table
+    <!-- <s-table
       :columns="columns"
       :data="loadData"
     >
       <template #serial="text, record,index"><span>{{ index+1 }}</span></template>
-    </s-table>
+    </s-table> -->
+    <tree></tree>
   </a-card>
 </template>
 
 <script>
 import { STable } from '@/components'
 import { list } from '@/api/system/permission'
+import Tree from './modules/Tree'
 export default {
   data () {
     return {
@@ -69,7 +71,7 @@ export default {
     }
   },
   components: {
-    STable
+    STable, Tree
   }
 }
 </script>

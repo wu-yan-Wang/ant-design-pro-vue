@@ -18,6 +18,7 @@ export default {
   // 菜单
   permission: {
     list: 'system/permission/list',
-    add: 'system/permission/add'
+    add: 'system/permission/add',
+    treeList: 'system/permission/treeList'
   }
 }
