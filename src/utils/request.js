@@ -42,8 +42,8 @@ const err = (error) => {
       }
     } else {
       notification.error({
-        message: data.error,
-        description: data.message
+        message: error.response.status,
+        description: error.response.statusText
       })
     }
   }

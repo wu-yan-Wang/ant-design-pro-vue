@@ -31,8 +31,7 @@
               <dict-select
                 :allowClear="true"
                 v-decorator="['sex', {
-                  initialValue:data.sex,
-                  rules: [{required: true, message: '请选择性别！'}]
+                  initialValue:data.sex
                 }]"
                 dictType="sex"
               ></dict-select>
@@ -62,6 +61,7 @@
 
 <script>
 import DictSelect from '@/components/DictSelect'
+import { add } from '@/api/system/user'
 export default {
   data () {
     return {
@@ -82,13 +82,16 @@ export default {
       this.form.validateFields((err, values) => {
         this.confirmLoading = true
         if (!err) {
-          console.log('Received values of form: ', values)
+          console.log(values)
+
           this.confirmLoading = true
-          setTimeout(() => {
+          add(values).then(() => {
+            this.$message.success('添加成功！')
+          }).finally(() => {
             this.confirmLoading = false
             this.$emit('ok')
             this.handleCancel()
-          }, 1000)
+          })
         } else {
           this.confirmLoading = false
         }

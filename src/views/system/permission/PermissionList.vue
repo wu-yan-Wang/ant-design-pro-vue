@@ -1,10 +1,12 @@
 <template>
-  <s-table
-    :columns="columns"
-    :data="loadData"
-  >
-    <template #serial="text, record,index"><span>{{ index+1 }}</span></template>
-  </s-table>
+  <a-card>
+    <s-table
+      :columns="columns"
+      :data="loadData"
+    >
+      <template #serial="text, record,index"><span>{{ index+1 }}</span></template>
+    </s-table>
+  </a-card>
 </template>
 
 <script>

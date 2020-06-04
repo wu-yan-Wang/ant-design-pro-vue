@@ -8,3 +8,7 @@ export function getUserList (parameter) {
     data: parameter
   })
 }
+
+export function add (parameter) {
+  return axios.post(api.user.add, parameter)
+}

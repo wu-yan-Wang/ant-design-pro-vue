@@ -73,18 +73,10 @@
       :data="loadData"
       showPagination="auto"
     >
-      <span
-        slot="serial"
-        slot-scope="text, record,index"
-      >
-        {{ index+1 }}
-      </span>
-      <span
-        slot="action"
-        slot-scope="text,record"
-      >
+      <template #serial="text, record,index"><span>{{ index+1 }}</span></template>
+      <template #action="text,record">
         <a @click="handleEdit(record)">修改</a>
-      </span>
+      </template>
     </s-table>
     <add-user
       ref="createModal"

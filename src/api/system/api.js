@@ -6,7 +6,8 @@ export default {
   },
   // 系统用户
   user: {
-    getUserList: 'system/user/list'
+    getUserList: 'system/user/list',
+    add: 'system/user/add'
   },
   // 角色
   role: {

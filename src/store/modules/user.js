@@ -41,7 +41,6 @@ const user = {
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
-          console.log('token', response)
           const result = response.result
           if (response.code === 1) {
             Vue.ls.set(ACCESS_TOKEN, result.token, 12 * 60 * 60 * 1000)
@@ -60,7 +59,6 @@ const user = {
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
-          console.log('userInfo', response)
           const result = response.result
           if (result.menuList && result.menuList.length > 0) {
             // 菜单

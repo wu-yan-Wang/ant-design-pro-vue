@@ -4,7 +4,6 @@ import store from './store'
 
 import NProgress from 'nprogress' // progress bar
 import '@/components/NProgress/nprogress.less' // progress bar custom style
-import notification from 'ant-design-vue/es/notification'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 
@@ -41,13 +40,7 @@ router.beforeEach((to, from, next) => {
               }
             })
           })
-          .catch((error) => {
-            console.log(error.response)
-
-            notification.error({
-              message: '错误',
-              description: error.response.data.message || '请求用户信息失败，请重试'
-            })
+          .catch(() => {
             store.dispatch('Logout').then(() => {
               next({ path: '/user/login', query: { redirect: to.fullPath } })
             })
