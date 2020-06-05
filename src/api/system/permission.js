@@ -8,3 +8,7 @@ export function list (parameter) {
 export function treeList () {
   return axios.post(api.permission.treeList)
 }
+
+export function getOneById (parameter) {
+  return axios.post(api.permission.getOneById, parameter)
+}

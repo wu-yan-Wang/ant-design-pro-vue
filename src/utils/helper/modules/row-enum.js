@@ -1,4 +1,5 @@
 const ROW_ENUM = {
+  gutter: 16,
   col1: {
     md: { span: 24 },
     sm: { span: 24 }
