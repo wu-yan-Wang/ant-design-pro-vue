@@ -1,9 +1,9 @@
 <template>
   <a-modal
     title="新建人员"
-    :width="800"
+    :width="$enum('modal.width')"
     :visible="visible"
-    :confirmLoading="confirmLoading"
+    :confirm-loading="confirmLoading"
     @ok="handleSubmit"
     @cancel="handleCancel"
   >

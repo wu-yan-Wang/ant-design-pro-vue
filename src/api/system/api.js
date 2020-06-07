@@ -19,6 +19,7 @@ export default {
   permission: {
     list: 'system/permission/list',
     add: 'system/permission/add',
+    update: 'system/permission/update',
     treeList: 'system/permission/treeList',
     getOneById: 'system/permission/getOneById'
   }

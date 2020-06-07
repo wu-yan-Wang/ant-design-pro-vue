@@ -12,3 +12,11 @@ export function treeList () {
 export function getOneById (parameter) {
   return axios.post(api.permission.getOneById, parameter)
 }
+
+export function add (parameter) {
+  return axios.post(api.permission.add, parameter)
+}
+
+export function update (parameter) {
+  return axios.post(api.permission.update, parameter)
+}
