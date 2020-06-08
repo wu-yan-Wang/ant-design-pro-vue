@@ -24,3 +24,7 @@ commitizen init cz-conventional-changelog --save-dev --save-exact
 - chore：构建过程或辅助工具的变动
 - revert:  还原先前的提交
 
+## 撤销commit
+``` shell
+git reset --soft HEAD^
+```

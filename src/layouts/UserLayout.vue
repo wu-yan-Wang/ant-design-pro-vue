@@ -4,8 +4,8 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">Ant Design</span>
+            <img src="~@/assets/wuyan.svg" class="logo" alt="logo">
+            <span class="title">Wu Yan Admin</span>
           </a>
         </div>
         <div class="desc">
