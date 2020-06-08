@@ -4,7 +4,7 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/wuyan.svg" class="logo" alt="logo">
+            <img src="~@/assets/wuyan.png" class="logo" alt="logo">
             <span class="title">Wu Yan Admin</span>
           </a>
         </div>

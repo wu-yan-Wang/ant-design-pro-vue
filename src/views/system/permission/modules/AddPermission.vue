@@ -132,6 +132,8 @@ export default {
           }).finally(() => {
             this.loading = false
             this.cancel()
+            this.$emit('refreshTree')
+            this.form.resetFields()
           })
         }
       })

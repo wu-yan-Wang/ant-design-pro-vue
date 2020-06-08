@@ -27,7 +27,7 @@
                   <a-input
                     v-decorator="['permissionCode',{
                       rules:[{required:true,message:'请输入菜单编码！'}],
-                      initialValue:data.permissionCode
+                      initialValue:formData.permissionCode
                     }]"></a-input>
                 </a-form-item>
               </a-col>
@@ -36,7 +36,7 @@
                   <a-input
                     v-decorator="['permissionName',{
                       rules:[{required:true,message:'请输入菜单名称！'}],
-                      initialValue:data.permissionName
+                      initialValue:formData.permissionName
                     }]"></a-input>
                 </a-form-item>
               </a-col>
@@ -45,7 +45,7 @@
                   <a-input
                     v-decorator="['permissionType',{
                       rules:[{required:true,message:'请输入菜单类型！'}],
-                      initialValue:data.permissionType
+                      initialValue:formData.permissionType
                     }]"></a-input>
                 </a-form-item>
               </a-col>
@@ -54,64 +54,52 @@
                   <a-input
                     v-decorator="['status',{
                       rules:[{required:true,message:'请选择是否有效！'}],
-                      initialValue:data.status
+                      initialValue:formData.status
                     }]"></a-input>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="菜单url">
                   <a-input
-                    v-decorator="['permissionUrl',{
-                      initialValue:data.permissionUrl
-                    }]"></a-input>
+                    v-decorator="['permissionUrl',{initialValue:formData.permissionUrl}]"></a-input>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="菜单组件">
                   <a-input
-                    v-decorator="['component',{
-                      initialValue:data.component
-                    }]"></a-input>
+                    v-decorator="['component',{initialValue:formData.component}]"></a-input>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="菜单权限">
                   <a-input
-                    v-decorator="['permission',{
-                      initialValue:data.permission
-                    }]"></a-input>
+                    v-decorator="['permission',{initialValue:formData.permission}]"></a-input>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="重定向的路径">
                   <a-input
-                    v-decorator="['redirect',{
-                      initialValue:data.redirect
-                    }]"></a-input>
+                    v-decorator="['redirect',{initialValue:formData.redirect}]"></a-input>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="菜单图标">
                   <a-input
-                    v-decorator="['permissionIcon',{
-                      initialValue:data.permissionIcon
-                    }]"></a-input>
+                    v-decorator="['permissionIcon',{initialValue:formData.permissionIcon}]"></a-input>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="排序">
                   <a-input
                     type="number"
-                    v-decorator="['displayOrder',{
-                      initialValue:data.displayOrder
-                    }]"></a-input>
+                    v-decorator="['displayOrder',{initialValue:formData.displayOrder}]"></a-input>
                 </a-form-item>
               </a-col>
             </a-row>
           </a-form>
         </a-col>
       </a-row>
-      <add-permission :parent-id="selectId" :parent-name="selectName" ref="addModal"></add-permission>
+      <add-permission :parent-id="selectId" :parent-name="selectName" @refreshTree="loadTreeData()" ref="addModal"></add-permission>
     </a-spin>
   </a-card>
 
@@ -119,12 +107,12 @@
 
 <script>
 import { treeList, getOneById, update } from '@/api/system/permission'
-import { Tree as ATree } from 'ant-design-vue'
+import { Tree as ATree, Modal } from 'ant-design-vue'
 import AddPermission from './AddPermission'
 export default {
   data () {
     return {
-      data: {},
+      formData: {},
       treeData: [],
       selectId: '',
       selectName: '',
@@ -137,15 +125,37 @@ export default {
   },
   methods: {
     treeSelect (e, node) {
+      const modal = Modal.info()
+
+      modal.update({
+        title: '修改的标题',
+        content: '修改的内容'
+      })
+
+      modal.destroy()
       if (e.length > 0) {
         this.loading = true
+        // 选择的节点
         this.selectKeys = e
+        // 选择的节点数据
         const data = node.selectedNodes[0].data
+        // 子组件父级id和name
         this.selectId = data.key
         this.selectName = data.props.title
+        // 查询菜单的数据
         getOneById({ id: this.selectId }).then(res => {
-          this.data = res.result
-          this.$forceUpdate()
+          this.formData = res.result
+          this.form.setFieldsValue({
+            permissionCode: this.formData.permissionCode,
+            permissionIcon: this.formData.permissionIcon,
+            permissionName: this.formData.permissionName,
+            permissionType: this.formData.permissionType,
+            permissionUrl: this.formData.permissionUrl,
+            redirect: this.formData.redirect,
+            status: this.formData.status,
+            component: this.formData.component,
+            displayOrder: this.formData.displayOrder,
+            permission: this.formData.permission })
         }).finally(() => {
           this.loading = false
         })
@@ -169,7 +179,7 @@ export default {
       this.form.validateFields((error, fields) => {
         if (!error) {
           this.loading = true
-          update({ ...this.data, ...fields }).then(() => {
+          update({ ...this.formData, ...fields }).then(() => {
             this.$message.success('更新完成！')
             // TODO 要不要再请求一次数据查询乐观锁,或者后台去查询一下version
             return this.loadTreeData()
@@ -180,7 +190,6 @@ export default {
       })
     },
     loadTreeData () {
-      debugger
       treeList().then(res => {
         this.treeData = res.result.map((item) => ({ ...item, expanded: true }))
       })
