@@ -68,8 +68,7 @@
       size="default"
       row-key="id"
       :columns="columns"
-      :alert="options.alert"
-      :row-selection="options.rowSelection"
+      :selected-row-keys="selectedRowKeys"
       :data="loadData"
       showPagination="auto"
     >
@@ -97,13 +96,6 @@ export default {
       col: this.$enum('row.col3'),
       optionAlertShow: false,
       selectedRowKeys: [],
-      options: {
-        alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
-        rowSelection: {
-          selectedRowKeys: this.selectedRowKeys,
-          onChange: this.onSelectChange
-        }
-      },
       // 表头
       columns: [
         {

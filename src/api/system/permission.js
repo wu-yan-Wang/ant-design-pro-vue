@@ -20,3 +20,7 @@ export function add (parameter) {
 export function update (parameter) {
   return axios.post(api.permission.update, parameter)
 }
+
+export function deletePermission (params) {
+  return axios.post(api.permission.delete, params)
+}

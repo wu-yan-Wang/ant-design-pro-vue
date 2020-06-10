@@ -5,10 +5,6 @@ export default {
   data () {
     return {
       needTotalList: [],
-
-      selectedRows: [],
-      selectedRowKeys: [],
-
       localLoading: false,
       localDataSource: [],
       localPagination: Object.assign({}, this.pagination)
@@ -43,16 +39,6 @@ export default {
       type: String,
       default: 'default'
     },
-    /**
-     * alert: {
-     *   show: true,
-     *   clear: Function
-     * }
-     */
-    alert: {
-      type: [Object, Boolean],
-      default: null
-    },
     rowSelection: {
       type: Object,
       default: null
@@ -65,6 +51,10 @@ export default {
     showPagination: {
       type: String | Boolean,
       default: 'auto'
+    },
+    selectedRowKeys: {
+      type: Array,
+      default: null
     },
     /**
      * enable page URI mode
@@ -152,7 +142,6 @@ export default {
         ...filters
       }
       )
-      console.log('parameter', parameter)
       const result = this.data(parameter)
       // 对接自己的通用数据接口需要修改下方代码中的 r.pageNo, r.totalCount, r.data
       // eslint-disable-next-line
@@ -205,8 +194,8 @@ export default {
      * @param selectedRows
      */
     updateSelect (selectedRowKeys, selectedRows) {
-      this.selectedRows = selectedRows
-      this.selectedRowKeys = selectedRowKeys
+      this.$emit('update:selectedRowKeys', selectedRowKeys)
+      this._events.rowChange && (this.$emit('rowChange', selectedRowKeys, selectedRows))
       const list = this.needTotalList
       this.needTotalList = list.map(item => {
         return {
@@ -222,8 +211,7 @@ export default {
      * 清空 table 已选中项
      */
     clearSelected () {
-      if (this.rowSelection) {
-        this.rowSelection.onChange([], [])
+      if (this.selectedRowKeys && this.selectedRowKeys.length > 0) {
         this.updateSelect([], [])
       }
     },
@@ -250,17 +238,13 @@ export default {
       })
 
       // 绘制 清空 按钮
-      const clearItem = (typeof this.alert.clear === 'boolean' && this.alert.clear) ? (
-        this.renderClear(this.clearSelected)
-      ) : (this.alert !== null && typeof this.alert.clear === 'function') ? (
-        this.renderClear(this.alert.clear)
-      ) : null
+      const clearItem = this.selectedRowKeys && (this.renderClear(this.clearSelected))
 
       // 绘制 alert 组件
       return (
         <a-alert showIcon={true} style="margin-bottom: 16px">
           <template slot="message">
-            <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{this.selectedRows.length}</a></span>
+            <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{this.selectedRowKeys.length}</a></span>
             {needTotalItems}
             {clearItem}
           </template>
@@ -272,7 +256,8 @@ export default {
   render () {
     const props = {}
     const localKeys = Object.keys(this.$data)
-    const showAlert = (typeof this.alert === 'object' && this.alert !== null && this.alert.show) && typeof this.rowSelection.selectedRowKeys !== 'undefined' || this.alert
+
+    const showAlert = this.selectedRowKeys
 
     Object.keys(T.props).forEach(k => {
       const localKey = `local${k.substring(0, 1).toUpperCase()}${k.substring(1)}`
@@ -281,15 +266,13 @@ export default {
         return props[k]
       }
       if (k === 'rowSelection') {
-        if (showAlert && this.rowSelection) {
+        if (showAlert) {
           // 如果需要使用alert，则重新绑定 rowSelection 事件
           props[k] = {
             ...this.rowSelection,
-            selectedRows: this.selectedRows,
             selectedRowKeys: this.selectedRowKeys,
             onChange: (selectedRowKeys, selectedRows) => {
               this.updateSelect(selectedRowKeys, selectedRows)
-              typeof this[k].onChange !== 'undefined' && this[k].onChange(selectedRowKeys, selectedRows)
             }
           }
           return props[k]

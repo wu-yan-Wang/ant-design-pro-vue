@@ -109,7 +109,8 @@ export default {
     }
   },
   created () {
-    this.menus = this.mainMenu.find(item => item.path === '/').children
+    const routes = this.mainMenu.find(item => item.path === '/')
+    this.menus = (routes && routes.children) || []
     this.collapsed = !this.sidebarOpened
   },
   mounted () {

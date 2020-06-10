@@ -19,6 +19,9 @@
             <a-col span="4">
               <a-button type="primary" icon="edit" @click="updatePermission">修改节点</a-button>
             </a-col>
+            <a-col span="4">
+              <a-button type="danger" icon="delete" @click="deletePermission">删除节点</a-button>
+            </a-col>
           </a-row>
           <a-form :form="form">
             <a-row :gutter="gutter">
@@ -106,7 +109,7 @@
 </template>
 
 <script>
-import { treeList, getOneById, update } from '@/api/system/permission'
+import { treeList, getOneById, update, deletePermission } from '@/api/system/permission'
 import { Tree as ATree, Modal } from 'ant-design-vue'
 import AddPermission from './AddPermission'
 export default {
@@ -116,6 +119,7 @@ export default {
       treeData: [],
       selectId: '',
       selectName: '',
+      selectNode: {},
       loading: false,
       selectKeys: [],
       col2: this.$enum('row.col2'),
@@ -125,6 +129,8 @@ export default {
   },
   methods: {
     treeSelect (e, node) {
+      console.log(node)
+
       const modal = Modal.info()
 
       modal.update({
@@ -137,11 +143,10 @@ export default {
         this.loading = true
         // 选择的节点
         this.selectKeys = e
-        // 选择的节点数据
-        const data = node.selectedNodes[0].data
-        // 子组件父级id和name
-        this.selectId = data.key
-        this.selectName = data.props.title
+        this.selectNode = node.node
+        // 选择节点的id和name
+        this.selectId = this.selectNode.eventKey
+        this.selectName = this.selectNode.title
         // 查询菜单的数据
         getOneById({ id: this.selectId }).then(res => {
           this.formData = res.result
@@ -165,23 +170,50 @@ export default {
 
     },
     addPermission () {
-      if (this.selectKeys.length === 0) {
+      if (!this.selectId) {
         this.$message.warning('请选择父节点！')
         return
       }
       this.$refs.addModal.add()
     },
     updatePermission () {
-      if (this.selectKeys.length === 0) {
-        this.$message.warning('请选择父节点！')
+      if (!this.selectId) {
+        this.$message.warning('请选择要修改的节点！')
         return
       }
+
       this.form.validateFields((error, fields) => {
         if (!error) {
+          this.$confirm({
+            content: '是否修改此节点?',
+            onOk: () => {
+              this.loading = true
+              update({ ...this.formData, ...fields }).then(() => {
+                this.$message.success('更新完成！')
+                return this.loadTreeData()
+              }).finally(() => {
+                this.loading = false
+              })
+            }
+          })
+        }
+      })
+    },
+    deletePermission () {
+      if (!this.selectId) {
+        this.$message.warning('请选择要删除的节点！')
+        return
+      }
+      if (this.selectNode.$children.length > 0) {
+        this.$message.warning('请先删除子节点,再删除父节点！')
+        return
+      }
+
+      this.$confirm({
+        content: `是否删除${this.selectName}?`,
+        onOk: () => {
           this.loading = true
-          update({ ...this.formData, ...fields }).then(() => {
-            this.$message.success('更新完成！')
-            // TODO 要不要再请求一次数据查询乐观锁,或者后台去查询一下version
+          deletePermission({ id: this.selectId }).then(() => {
             return this.loadTreeData()
           }).finally(() => {
             this.loading = false

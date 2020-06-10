@@ -26,3 +26,27 @@ export function haveRole () {
 export function addUserRole (params) {
   return axios.post(api.role.addUserRole, params)
 }
+
+/**
+ * 分页查询
+ * @param {Object} params
+ */
+export function pageList (params) {
+  return axios.post(api.role.pageList, params)
+}
+
+/**
+ * 更新角色
+ * @param {Object} params
+ */
+export function updateRole (params) {
+  return axios.post(api.role.updateRole, params)
+}
+
+/**
+ * 删除角色
+ * @param {Object}} params
+ */
+export function deleteRole (params) {
+  return axios.post(api.role.deleteRole, params)
+}
