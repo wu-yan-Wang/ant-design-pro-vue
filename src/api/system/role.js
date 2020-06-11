@@ -50,3 +50,11 @@ export function updateRole (params) {
 export function deleteRole (params) {
   return axios.post(api.role.deleteRole, params)
 }
+
+/**
+ * 根据角色id获取菜单集合
+ * @param {Object} params
+ */
+export function getPermissionByRoleId (params) {
+  return axios.post(api.role.getPermissionByRoleId, params)
+}

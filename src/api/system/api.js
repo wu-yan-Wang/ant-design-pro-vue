@@ -16,7 +16,8 @@ export default {
     update: 'system/role/updateRole',
     delete: 'system/role/deleteRole',
     haveRole: 'system/role/haveRole',
-    addUserRole: 'system/role/addUserRole'
+    addUserRole: 'system/role/addUserRole',
+    getPermissionByRoleId: 'system/permission/getPermissionByRoleId'
   },
   // 菜单
   permission: {

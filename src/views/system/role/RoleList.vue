@@ -8,9 +8,9 @@
       <template #serial="text,record,index">
         <span>{{ index+1 }}</span>
       </template>
-      <template #expandedRowRender="text">
+      <template #expandedRowRender="{id}">
         <div>
-          {{ text }}
+          <permission-card :role-id="id"></permission-card>
         </div>
       </template>
       <template #action="text,record">
@@ -23,6 +23,7 @@
 <script>
 import { STable } from '@/components'
 import { pageList } from '@/api/system/role'
+import PermissionCard from '@/views/system/role/modules/PermissionCard'
 export default {
   data () {
     return {
@@ -55,7 +56,7 @@ export default {
     }
   },
   components: {
-    STable
+    STable, PermissionCard
   }
 }
 </script>
