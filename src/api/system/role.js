@@ -58,3 +58,11 @@ export function deleteRole (params) {
 export function getPermissionByRoleId (params) {
   return axios.post(api.role.getPermissionByRoleId, params)
 }
+
+/**
+ * 根据角色id获取菜单标签
+ * @param {Object} params
+ */
+export function getTagPermissionByRoleId (params) {
+  return axios.post(api.role.getTagPermissionByRoleId, params)
+}

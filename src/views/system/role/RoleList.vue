@@ -9,21 +9,22 @@
         <span>{{ index+1 }}</span>
       </template>
       <template #expandedRowRender="{id}">
-        <div>
-          <permission-card :role-id="id"></permission-card>
-        </div>
+        <permission-card :role-id="id"></permission-card>
       </template>
       <template #action="text,record">
         <a @click="edit(record)">编辑</a>
+        <a-divider type="vertical" />
+        <a @click="$refs.auth.roleAuth(record)">授权</a>
       </template>
     </s-table>
+    <RoleAuth ref="auth"></RoleAuth>
   </a-card>
 </template>
 
 <script>
 import { STable } from '@/components'
 import { pageList } from '@/api/system/role'
-import PermissionCard from '@/views/system/role/modules/PermissionCard'
+import { PermissionCard, RoleAuth } from './modules/index'
 export default {
   data () {
     return {
@@ -50,13 +51,16 @@ export default {
     edit (record) {
       console.log(record)
     },
+    auth (record) {
+
+    },
     onSelectChange (e) {
       console.log(e)
       this.selectedRowKeys = e
     }
   },
   components: {
-    STable, PermissionCard
+    STable, PermissionCard, RoleAuth
   }
 }
 </script>

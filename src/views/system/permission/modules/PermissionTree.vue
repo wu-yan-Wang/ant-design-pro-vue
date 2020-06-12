@@ -110,7 +110,7 @@
 
 <script>
 import { treeList, getOneById, update, deletePermission } from '@/api/system/permission'
-import { Tree as ATree, Modal } from 'ant-design-vue'
+import { Tree as ATree } from 'ant-design-vue'
 import AddPermission from './AddPermission'
 export default {
   data () {
@@ -129,16 +129,6 @@ export default {
   },
   methods: {
     treeSelect (e, node) {
-      console.log(node)
-
-      const modal = Modal.info()
-
-      modal.update({
-        title: '修改的标题',
-        content: '修改的内容'
-      })
-
-      modal.destroy()
       if (e.length > 0) {
         this.loading = true
         // 选择的节点

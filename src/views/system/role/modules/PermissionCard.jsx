@@ -1,5 +1,6 @@
 
-import { getPermissionByRoleId } from '@/api/system/role'
+import { getTagPermissionByRoleId } from '@/api/system/role'
+import Empty from 'ant-design-vue/es/empty'
 export default {
   data () {
     return {
@@ -15,11 +16,13 @@ export default {
   },
   created () {
     this.loading = true
-    getPermissionByRoleId({ id: this.roleId }).then(res => {
-      this.data = res.result
-    }).finally(() => {
-      this.loading = false
-    })
+    getTagPermissionByRoleId({ id: this.roleId })
+      .then(res => {
+        this.data = res.result
+      })
+      .finally(() => {
+        this.loading = false
+      })
   },
   methods: {
     renderCol () {
@@ -34,21 +37,20 @@ export default {
       ))
     },
     renderChildren (data) {
-      debugger
-      return (
-        data.map(child => (
-          <a-col span="2">{child.permissionName}</a-col>
-        ))
-      )
+      return data.map(child => (
+        <a-col span="2">
+          <a-tag color="pink">{child.permissionName}</a-tag>
+        </a-col>
+      ))
     }
   },
   render () {
     return (
-      <a-row gutter={this.$enum('row.gutter')}>
-        <a-spin spinning={this.loading}>
-          {this.renderCol()}
-        </a-spin>
-      </a-row>
+      <a-spin spinning={this.loading}>
+        <a-row gutter={this.$enum('row.gutter')}>
+          {this.data.length > 0 ? this.renderCol() : <Empty />}
+        </a-row>
+      </a-spin>
     )
   }
 }
