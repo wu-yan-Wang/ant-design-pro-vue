@@ -15,6 +15,10 @@ const ROW_ENUM = {
   col4: {
     md: { span: 6 },
     sm: { span: 24 }
+  },
+  col8: {
+    md: { span: 3 },
+    sm: { span: 24 }
   }
 }
 

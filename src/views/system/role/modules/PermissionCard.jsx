@@ -1,6 +1,7 @@
 
 import { getTagPermissionByRoleId } from '@/api/system/role'
 import Empty from 'ant-design-vue/es/empty'
+import { Ellipsis } from '@/components'
 export default {
   data () {
     return {
@@ -26,31 +27,32 @@ export default {
   },
   methods: {
     renderCol () {
-      const props = { props: { ...this.$enum('row.col2') } }
       return this.data.map(item => (
-        <a-col {...props}>
-          <a-col span="4">
-            <span> {item.permissionName}</span>
+        <a-col span={12}>
+          <a-col span={4}>
+            <Ellipsis tooltip length={8}>{item.permissionName}</Ellipsis>
           </a-col>
-          {item.children.length > 0 && this.renderChildren(item.children)}
+          <a-col span={20}>
+            {item.children.length > 0 ? this.renderChildren(item.children) : '-'}
+          </a-col>
         </a-col>
       ))
     },
     renderChildren (data) {
       return data.map(child => (
-        <a-col span="2">
-          <a-tag color="pink">{child.permissionName}</a-tag>
-        </a-col>
+        <a-tag color="cyan">{child.permissionName}</a-tag>
       ))
     }
   },
   render () {
     return (
-      <a-spin spinning={this.loading}>
-        <a-row gutter={this.$enum('row.gutter')}>
-          {this.data.length > 0 ? this.renderCol() : <Empty />}
-        </a-row>
-      </a-spin>
+      <div style="margin: 0">
+        <a-spin spinning={this.loading}>
+          <a-row gutter={24} >
+            {this.data.length > 0 ? this.renderCol() : <Empty />}
+          </a-row>
+        </a-spin>
+      </div>
     )
   }
 }

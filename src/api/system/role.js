@@ -15,8 +15,16 @@ export function getList (params) {
 /**
  * 获取拥有的角色
  */
-export function haveRole () {
-  return axios.post(api.role.haveRole)
+export function haveRole (params) {
+  return axios.post(api.role.haveRole, params)
+}
+
+/**
+ * 获取角色详情
+ * @param {Object} params
+ */
+export function getOne (params) {
+  return axios.post(api.role.getOne, params)
 }
 
 /**
@@ -33,6 +41,14 @@ export function addUserRole (params) {
  */
 export function pageList (params) {
   return axios.post(api.role.pageList, params)
+}
+
+/**
+ * 添加角色
+ * @param {Object} params
+ */
+export function addRole (params) {
+  return axios.post(api.role.addRole, params)
 }
 
 /**
@@ -65,4 +81,12 @@ export function getPermissionByRoleId (params) {
  */
 export function getTagPermissionByRoleId (params) {
   return axios.post(api.role.getTagPermissionByRoleId, params)
+}
+
+/**
+ * 添加角色和权限关系
+ * @param {Array} params
+ */
+export function addRolePermission (params) {
+  return axios.post(api.role.addRolePermission, params)
 }

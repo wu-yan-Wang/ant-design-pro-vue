@@ -36,29 +36,34 @@ export default {
       roleData: [],
       roleTargetKeys: [],
       roleSelectedKeys: [],
-      loading: false
+      loading: false,
+      userId: ''
     }
   },
-  async created () {
-    const roles = await getList()
-    this.roleData = roles.result.map(item => ({
-      key: item.id,
-      title: item.roleName,
-      description: item.roleName,
-      disabled: false }))
-    const haves = await haveRole()
-    this.roleTargetKeys = haves.result.map(item => item.roleId)
+  created () {
+    getList().then(res => {
+      this.roleData = res.result.map(item => ({
+        key: item.id,
+        title: item.roleName,
+        description: item.roleName,
+        disabled: false }))
+    })
   },
   methods: {
-    add () {
-      this.visible = true
+    add (record) {
+      this.userId = record.id
+      haveRole({ userId: this.userId }).then((res) => {
+        this.roleTargetKeys = res.result.map(item => item.roleId)
+        this.visible = true
+      })
     },
     handleSubmit () {
       if (this.roleTargetKeys.length > 0) {
         this.loading = true
-        const param = this.roleTargetKeys.map(item => ({ roleId: item }))
+        const param = this.roleTargetKeys.map(item => ({ userId: this.userId, roleId: item }))
         addUserRole(param).then(() => {
           this.$message.success('赋权成功！')
+          this.visible = false
         }).finally(() => {
           this.loading = false
         })

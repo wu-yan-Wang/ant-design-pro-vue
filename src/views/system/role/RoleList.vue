@@ -1,10 +1,32 @@
 <template>
   <a-card>
+    <more-page-search>
+      <a-col v-bind="searchCol">
+        <a-form-item label="角色名称"><a-input v-model="queryParam.roleName"></a-input></a-form-item>
+      </a-col>
+      <a-col v-bind="searchCol">
+        <a-form-item label="角色编码"><a-input v-model="queryParam.roleCode"></a-input></a-form-item>
+      </a-col>
+      <template #hide-ele>
+        <a-col v-bind="searchCol">
+          <a-form-item label="角色状态"><a-input v-model="queryParam.status"></a-input></a-form-item>
+        </a-col>
+      </template>
+      <template #table-btn>
+        <a-button
+          type="primary"
+          @click="$refs.roleList.refresh(true)"
+        >查询</a-button>
+        <a-button
+          style="margin-left: 8px"
+          @click="()=>queryParam={}"
+        >重置</a-button>
+      </template>
+    </more-page-search>
     <div class="table-operator">
-      <a-button type="primary" icon="plus">新建</a-button>
-      <a-button type="danger" icon="delete">删除</a-button>
+      <a-button type="primary" icon="plus" @click="$refs.addRole.addRole()">新建</a-button>
     </div>
-    <s-table :data="data" rowKey="id" :columns="columns" >
+    <s-table ref="roleList" :data="data" rowKey="id" :columns="columns" >
       <template #serial="text,record,index">
         <span>{{ index+1 }}</span>
       </template>
@@ -12,23 +34,30 @@
         <permission-card :role-id="id"></permission-card>
       </template>
       <template #action="text,record">
-        <a @click="edit(record)">编辑</a>
-        <a-divider type="vertical" />
         <a @click="$refs.auth.roleAuth(record)">授权</a>
+        <a-divider type="vertical" />
+        <a @click="$refs.editRole.editRole(record)">编辑</a>
+        <a-divider type="vertical" />
+        <a-popconfirm title="确定删除吗？" @confirm="remove(record)">
+          <a href="#">删除</a>
+        </a-popconfirm>
       </template>
     </s-table>
-    <RoleAuth ref="auth"></RoleAuth>
+    <role-auth ref="auth"></role-auth>
+    <add-role ref="addRole" @ok="$refs.roleList.refresh()"></add-role>
+    <edit-role ref="editRole" @ok="$refs.roleList.refresh()"></edit-role>
   </a-card>
 </template>
 
 <script>
-import { STable } from '@/components'
-import { pageList } from '@/api/system/role'
-import { PermissionCard, RoleAuth } from './modules/index'
+import { STable, MorePageSearch } from '@/components'
+import { pageList, deleteRole } from '@/api/system/role'
+import { PermissionCard, RoleAuth, AddRole, EditRole } from './modules/index'
 export default {
   data () {
     return {
-      data: parameter => pageList(parameter).then(res => res.result),
+      data: parameter => pageList({ ...this.queryParam, ...parameter }).then(res => res.result),
+      queryParam: {},
       columns: [{
         title: '#',
         scopedSlots: { customRender: 'serial' }
@@ -44,23 +73,20 @@ export default {
       }, {
         title: '操作',
         scopedSlots: { customRender: 'action' }
-      }]
+      }],
+      searchCol: this.$enum('row.col3')
     }
   },
   methods: {
-    edit (record) {
-      console.log(record)
-    },
-    auth (record) {
-
-    },
-    onSelectChange (e) {
-      console.log(e)
-      this.selectedRowKeys = e
+    remove (record) {
+      deleteRole(record).then(() => {
+        this.$message.success('删除成功！')
+        this.$refs.roleList.refresh()
+      })
     }
   },
   components: {
-    STable, PermissionCard, RoleAuth
+    STable, PermissionCard, RoleAuth, AddRole, EditRole, MorePageSearch
   }
 }
 </script>

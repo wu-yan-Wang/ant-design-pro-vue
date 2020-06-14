@@ -18,21 +18,28 @@
         >
           <a-col v-bind="col3">
             <a-form-item label="账号">
-              <a-input v-decorator="['account', {rules: [{required: true, min: 6 ,max:18, message: '账号必须在6~18位！'}]}]" />
+              <a-input
+                v-decorator="[
+                  'account',
+                  {rules:
+                    [{required: true, min: 6 ,max:18, message: '账号必须在6~18位！'}]
+                  }]" />
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
             <a-form-item label="姓名">
-              <a-input v-decorator="['name', {rules: [{required: true, max: 6, message: '姓名最多输入五个字符！'}]}]" />
+              <a-input
+                v-decorator="['name',
+                              {rules:
+                                [{required: true, max: 6, message: '姓名最多输入五个字符！'}]
+                              }]" />
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
             <a-form-item label="性别">
               <dict-select
                 :allowClear="true"
-                v-decorator="['sex', {
-                  initialValue:data.sex
-                }]"
+                v-decorator="['sex']"
                 dictType="sex"
               ></dict-select>
             </a-form-item>
@@ -61,7 +68,7 @@
 
 <script>
 import DictSelect from '@/components/DictSelect'
-import { add } from '@/api/system/user'
+import { update, getOne } from '@/api/system/user'
 export default {
   data () {
     return {
@@ -72,24 +79,37 @@ export default {
       data: {}
     }
   },
-  created () {
-  },
   methods: {
-    add () {
-      this.visible = true
+    edit (record) {
+      this.confirmLoading = true
+      getOne(record).then(res => {
+        this.data = res.result
+        this.form.setFieldsValue({
+          account: this.data.account,
+          name: this.data.name,
+          // sex: this.data.sex,
+          mobilePhone: this.data.mobilePhone,
+          email: this.data.email
+        })
+        this.visible = true
+      }).finally(() => {
+        this.confirmLoading = false
+      })
     },
     handleSubmit () {
       this.form.validateFields((err, values) => {
+        this.confirmLoading = true
         if (!err) {
           this.confirmLoading = true
-          add(values).then(() => {
-            this.$message.success('添加成功！')
-            this.form.resetFields()
-            this.$emit('ok')
-            this.handleCancel()
+          update({ ...this.data, ...values }).then(() => {
+            this.$message.success('修改成功！')
           }).finally(() => {
             this.confirmLoading = false
+            this.$emit('ok')
+            this.handleCancel()
           })
+        } else {
+          this.confirmLoading = false
         }
       })
     },

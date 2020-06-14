@@ -9,6 +9,18 @@ export function getUserList (parameter) {
   })
 }
 
+export function getOne (params) {
+  return axios.post(api.user.getOne, params)
+}
+
 export function add (parameter) {
   return axios.post(api.user.add, parameter)
+}
+
+export function remove (parameter) {
+  return axios.post(api.user.remove, parameter)
+}
+
+export function update (parameter) {
+  return axios.post(api.user.update, parameter)
 }

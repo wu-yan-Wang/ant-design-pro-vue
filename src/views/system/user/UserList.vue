@@ -42,17 +42,8 @@
         icon="plus"
         @click="$refs.createModal.add()"
       >新建</a-button>
-      <a-button
-        type="danger"
-        icon="delete"
-      >删除</a-button>
       <a-dropdown>
         <a-menu slot="overlay">
-          <a-menu-item
-            key="1"
-            @click="$refs.addAuth.add()"
-          >
-            <a-icon type="safety" />授权</a-menu-item>
           <!-- lock | unlock -->
           <a-menu-item key="2">
             <a-icon type="lock" />启用</a-menu-item>
@@ -68,13 +59,18 @@
       size="default"
       row-key="id"
       :columns="columns"
-      :selected-row-keys="selectedRowKeys"
       :data="loadData"
       showPagination="auto"
     >
       <template #serial="text, record,index"><span>{{ index+1 }}</span></template>
       <template #action="text,record">
-        <a @click="handleEdit(record)">修改</a>
+        <a @click="$refs.addAuth.add(record)">赋权</a>
+        <a-divider type="vertical"/>
+        <a @click="handleEdit(record)">编辑</a>
+        <a-divider type="vertical" />
+        <a-popconfirm title="确定删除吗？" @confirm="handleDel(record)">
+          <a href="#">删除</a>
+        </a-popconfirm>
       </template>
     </s-table>
     <add-user
@@ -82,20 +78,19 @@
       @ok="handleOk"
     ></add-user>
     <add-auth ref="addAuth"></add-auth>
+    <edit-user ref="editUser" @ok="handleOk"></edit-user>
   </a-card>
 </template>
 
 <script>
 import { STable, MorePageSearch } from '@/components'
-import { AddAuth, AddUser } from './modules'
-import { getUserList } from '@/api/system/user'
+import { AddAuth, AddUser, EditUser } from './modules'
+import { getUserList, remove } from '@/api/system/user'
 
 export default {
   data () {
     return {
       col: this.$enum('row.col3'),
-      optionAlertShow: false,
-      selectedRowKeys: [],
       // 表头
       columns: [
         {
@@ -149,31 +144,26 @@ export default {
       queryParam: {}
     }
   },
-  created () {
-    console.log('路由', this.$route.params)
-  },
   methods: {
-    tableOption () {
-      this.optionAlertShow = !this.optionAlertShow
-    },
     handleOk () {
       this.$refs.table.refresh()
     },
-    onSelectChange (e) {
-      console.log(e)
-    },
     handleEdit (record) {
-      console.log(record)
+      this.$refs.editUser.edit(record)
     },
     handleDel (record) {
-      console.log(record)
+      remove(record).then(() => {
+        this.$message.warning('删除成功！')
+        this.handleOk()
+      })
     }
   },
   components: {
     MorePageSearch,
     STable,
     AddUser,
-    AddAuth
+    AddAuth,
+    EditUser
   }
 }
 </script>

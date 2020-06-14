@@ -23,12 +23,13 @@ const err = (error) => {
 
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
-    if (error.response.status === 403) {
-      notification.error({
-        message: 'Forbidden',
-        description: data.message
-      })
-    } else if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
+    // if (error.response.status === 403) {
+    //   notification.error({
+    //     message: 'Forbidden',
+    //     description: data.message
+    //   })
+    // } else
+    if (error.response.status === 403 || (error.response.status === 401 && !(data.result && data.result.isLogin))) {
       notification.error({
         message: 'Unauthorized',
         description: 'Authorization verification failed'
