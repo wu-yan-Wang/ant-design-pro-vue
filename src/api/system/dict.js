@@ -8,3 +8,11 @@ export function getDictType (parameter) {
     data: parameter
   })
 }
+
+/**
+ * 获取字典组分页列表
+ * @param {Object}} parameter
+ */
+export function groupPageList (parameter) {
+  return axios.post(api.dict.groupPageList, parameter)
+}

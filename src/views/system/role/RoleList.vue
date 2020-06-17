@@ -43,7 +43,7 @@
         </a-popconfirm>
       </template>
     </s-table>
-    <role-auth ref="auth"></role-auth>
+    <role-auth ref="auth" @ok="$refs.roleList.refresh()"></role-auth>
     <add-role ref="addRole" @ok="$refs.roleList.refresh()"></add-role>
     <edit-role ref="editRole" @ok="$refs.roleList.refresh()"></edit-role>
   </a-card>

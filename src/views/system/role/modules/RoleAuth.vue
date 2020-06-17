@@ -74,6 +74,7 @@ export default {
       const params = this.checkData.map(item => ({ roleId: this.roleId, permissionId: item }))
       addRolePermission(params).then(() => {
         this.$message.success('添加成功！')
+        this.$emit('ok')
         this.cancel()
       }).finally(() => {
         this.loading = false

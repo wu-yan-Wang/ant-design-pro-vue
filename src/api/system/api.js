@@ -2,7 +2,8 @@
 export default {
   // 字典
   dict: {
-    getDictType: 'system/dict/getDictByType'
+    getDictType: 'system/dict/getDictByType',
+    groupPageList: 'system/sysDictGroup/pageList'
   },
   // 系统用户
   user: {
