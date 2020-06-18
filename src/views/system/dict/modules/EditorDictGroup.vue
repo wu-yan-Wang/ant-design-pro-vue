@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { addDictGroup } from '@/api/system/dict'
+import { updateDictGroup, getDictGroupOne } from '@/api/system/dict'
 export default {
   data () {
     return {
@@ -62,11 +62,20 @@ export default {
       loading: false,
       form: this.$form.createForm(this),
       gutter: this.$enum('row.gutter'),
-      col: this.$enum('row.col2')
+      col: this.$enum('row.col2'),
+      data: {}
     }
   },
   methods: {
-    create () {
+    editor (record) {
+      this.loading = true
+      getDictGroupOne(res => {
+        this.data = res.result
+        const { groupCode, groupName, groupDescribe, displayOrder } = res.result
+        this.form.setFieldsValue({ groupCode, groupName, groupDescribe, displayOrder })
+      }).finally(() => {
+        this.loading = false
+      })
       this.visible = true
     },
     cancel () {
@@ -76,7 +85,7 @@ export default {
       this.form.validateFields((error, fields) => {
         if (!error) {
           this.loading = true
-          addDictGroup(fields).then(() => {
+          updateDictGroup(fields).then(() => {
             this.$message.success('添加成功！')
             this.cancel()
             this.$emit('ok')

@@ -26,41 +26,71 @@
       </template>
     </more-page-search>
     <div class="table-operator">
-      <a-button type="primary" icon="plus">新增</a-button>
+      <a-button type="primary" icon="plus" @click="$refs.create.create()">新增</a-button>
     </div>
-    <s-table ref="table" :data="data" row-key="id" :columns="columns"></s-table>
+    <s-table ref="table" :data="data" row-key="id" :columns="columns">
+      <template #serial="text,record,index">
+        <span>{{ index+1 }}</span>
+      </template>
+      <template #action="text,record">
+        <a href="#" @click="$refs.editor.editor(record)">编辑</a>
+        <a-divider type="vertical"></a-divider>
+        <a-popconfirm title="确定要删除吗？" @confirm="remove(record)">
+          <a href="#">删除</a>
+        </a-popconfirm>
+      </template>
+    </s-table>
+    <create-dict-group ref="create" @ok="refresh()"></create-dict-group>
+    <editor-dict-group ref="editor" @ok="refresh()"></editor-dict-group>
   </a-card>
 </template>
 
 <script>
+import { CreateDictGroup, EditorDictGroup } from './modules'
 import { STable, MorePageSearch } from '@/components'
-import { groupPageList } from '@/api/system/dict'
+import { groupPageList, deleteDictGroup } from '@/api/system/dict'
 export default {
   data () {
     return {
       col: this.$enum('row.col3'),
       data: parameter => groupPageList({ ...this.queryParam, ...parameter }).then((res) => res.result),
       queryParam: {},
-      columns: [{
-        title: '#',
-        scopedSlots: { customRender: 'serial' }
-      },
-      {
-        title: '编码',
-        dataIndex: 'groupCode'
-      },
-      {
-        title: '名称',
-        dataIndex: 'groupName'
-      },
-      {
-        title: '描述',
-        dataIndex: 'groupDescribe'
-      }]
+      columns: [
+        {
+          title: '#',
+          scopedSlots: { customRender: 'serial' }
+        },
+        {
+          title: '编码',
+          dataIndex: 'groupCode'
+        },
+        {
+          title: '名称',
+          dataIndex: 'groupName'
+        },
+        {
+          title: '描述',
+          dataIndex: 'groupDescribe'
+        }, {
+          title: '操作',
+          scopedSlots: { customRender: 'action' }
+        }
+      ]
+    }
+  },
+  methods: {
+    refresh () {
+      this.$refs.table.refresh(true)
+    },
+    remove (record) {
+      deleteDictGroup(record).then(() => {
+        this.$message.success('删除成功！')
+        this.refresh()
+      })
     }
   },
   components: {
-    STable, MorePageSearch
+    STable, MorePageSearch, CreateDictGroup, EditorDictGroup
   }
 }
 </script>

@@ -3,7 +3,12 @@ export default {
   // 字典
   dict: {
     getDictType: 'system/dict/getDictByType',
-    groupPageList: 'system/sysDictGroup/pageList'
+    // 分页
+    groupPageList: 'system/sysDictGroup/pageList',
+    getDictGroupOne: 'system/sysDictGroup/getOne',
+    addGroupDict: 'system/sysDictGroup/add',
+    updateGroupDict: 'system/sysDictGroup/update',
+    deleteGroupDict: 'system/sysDictGroup/delete'
   },
   // 系统用户
   user: {
