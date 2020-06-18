@@ -10,6 +10,38 @@ export function getDictType (parameter) {
 }
 
 /**
+ * 字典分页
+ * @param {Object} param
+ */
+export function pageList (param) {
+  return axios.post(api.dict.pageList, param)
+}
+
+/**
+ * 添加
+ * @param {Object} params
+ */
+export function add (params) {
+  return axios.post(api.dict.add, params)
+}
+
+/**
+ * 修改
+ * @param {Object} params
+ */
+export function update (params) {
+  return axios.post(api.dict.update, params)
+}
+
+/**
+ * 删除
+ * @param {Object} params
+ */
+export function remove (params) {
+  return axios.post(api.dict.remove, params)
+}
+
+/**
  * 获取字典组分页列表
  * @param {Object}} parameter
  */

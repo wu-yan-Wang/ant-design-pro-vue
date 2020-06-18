@@ -69,7 +69,7 @@ export default {
   methods: {
     editor (record) {
       this.loading = true
-      getDictGroupOne(res => {
+      getDictGroupOne(record).then(res => {
         this.data = res.result
         const { groupCode, groupName, groupDescribe, displayOrder } = res.result
         this.form.setFieldsValue({ groupCode, groupName, groupDescribe, displayOrder })
@@ -85,8 +85,8 @@ export default {
       this.form.validateFields((error, fields) => {
         if (!error) {
           this.loading = true
-          updateDictGroup(fields).then(() => {
-            this.$message.success('添加成功！')
+          updateDictGroup({ ...this.data, ...fields }).then(() => {
+            this.$message.success('修改成功！')
             this.cancel()
             this.$emit('ok')
             this.form.resetFields()

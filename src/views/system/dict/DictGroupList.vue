@@ -33,6 +33,8 @@
         <span>{{ index+1 }}</span>
       </template>
       <template #action="text,record">
+        <a href="#" @click="$refs.dict.show()">字典配置</a>
+        <a-divider type="vertical"></a-divider>
         <a href="#" @click="$refs.editor.editor(record)">编辑</a>
         <a-divider type="vertical"></a-divider>
         <a-popconfirm title="确定要删除吗？" @confirm="remove(record)">
@@ -42,11 +44,12 @@
     </s-table>
     <create-dict-group ref="create" @ok="refresh()"></create-dict-group>
     <editor-dict-group ref="editor" @ok="refresh()"></editor-dict-group>
+    <dict-list ref="dict"></dict-list>
   </a-card>
 </template>
 
 <script>
-import { CreateDictGroup, EditorDictGroup } from './modules'
+import { CreateDictGroup, EditorDictGroup, DictList } from './modules'
 import { STable, MorePageSearch } from '@/components'
 import { groupPageList, deleteDictGroup } from '@/api/system/dict'
 export default {
@@ -90,7 +93,7 @@ export default {
     }
   },
   components: {
-    STable, MorePageSearch, CreateDictGroup, EditorDictGroup
+    STable, MorePageSearch, CreateDictGroup, EditorDictGroup, DictList
   }
 }
 </script>

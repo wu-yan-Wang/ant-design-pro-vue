@@ -2,8 +2,14 @@
 export default {
   // 字典
   dict: {
+    // 字典
+    pageList: 'system/dict/pageList',
+    getOne: 'system/dict/getOne',
+    add: 'system/dict/add',
+    update: 'system/dict/update',
+    remove: 'system/dict/delete',
     getDictType: 'system/dict/getDictByType',
-    // 分页
+    // 字典组分页
     groupPageList: 'system/sysDictGroup/pageList',
     getDictGroupOne: 'system/sysDictGroup/getOne',
     addGroupDict: 'system/sysDictGroup/add',
