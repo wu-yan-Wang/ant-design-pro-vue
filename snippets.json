@@ -5,7 +5,9 @@
       "<template>",
       "<a-modal",
       ":visible=\"visible\"",
-      "title=\"\"",
+      "title=\"$1\"",
+      ":width=\"\\$enum('modal.width')\"",
+      ":confirm-loading=\"loading\"",
       "@cancel=\"cancel\"",
       "@ok=\"handleSumbit\"",
       ">",
@@ -29,9 +31,9 @@
       "return {",
       "visible: false,",
       "loading: false,",
-      "form: this.$form.createForm(this),",
-      "gutter: this.$enum('row.gutter'),",
-      "col: this.$enum('row.col')",
+      "form: this.\\$form.createForm(this),",
+      "gutter: this.\\$enum('row.gutter'),",
+      "col: this.\\$enum('row.col')",
       "}",
       "},",
       "methods: {",
@@ -53,5 +55,10 @@
       ""
     ],
     "description": "新增界面"
+  },
+  "export axios function": {
+    "prefix": "eaf",
+    "body": ["export function ${1:name} (parameter) {", "  return axios.post(${2:api}, parameter)", "}"],
+    "description": "导出api方法"
   }
 }
