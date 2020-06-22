@@ -45,10 +45,13 @@
           </a-col>
           <a-col v-bind="col2">
             <a-form-item label="是否有效">
-              <a-input
+              <dict-select
+                default
+                group-code="status"
                 v-decorator="['status',{
-                  rules:[{required:true,message:'请选择是否有效！'}]
-                }]"></a-input>
+                  rules:[{required:true,message:'请选择是否有效！'
+                  }]
+                }]"></dict-select>
             </a-form-item>
           </a-col>
           <a-col v-bind="col2">
@@ -96,6 +99,7 @@
 
 <script>
 import { add } from '@/api/system/permission'
+import DictSelect from '@/components/DictSelect'
 export default {
   data () {
     return {
@@ -138,6 +142,9 @@ export default {
         }
       })
     }
+  },
+  components: {
+    DictSelect
   }
 }
 </script>

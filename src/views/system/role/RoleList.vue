@@ -30,6 +30,9 @@
       <template #serial="text,record,index">
         <span>{{ index+1 }}</span>
       </template>
+      <template #status="text">
+        <span>{{ text|dict('status') }}</span>
+      </template>
       <template #expandedRowRender="{id}">
         <permission-card :role-id="id"></permission-card>
       </template>
@@ -69,8 +72,10 @@ export default {
         dataIndex: 'roleCode'
       }, {
         title: '状态',
-        dataIndex: 'status'
-      }, {
+        dataIndex: 'status',
+        scopedSlots: { customRender: 'status' }
+      },
+      {
         title: '操作',
         scopedSlots: { customRender: 'action' }
       }],

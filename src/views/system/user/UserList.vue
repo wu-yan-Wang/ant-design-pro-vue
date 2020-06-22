@@ -66,6 +66,9 @@
       <template #sex="text">
         <span>{{ text|dict('sex') }}</span>
       </template>
+      <template #status="text">
+        <span>{{ text|dict('status') }}</span>
+      </template>
       <template #action="text,record">
         <a @click="$refs.addAuth.add(record)">赋权</a>
         <a-divider type="vertical"/>

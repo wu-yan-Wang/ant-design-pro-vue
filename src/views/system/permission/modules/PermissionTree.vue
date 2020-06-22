@@ -54,11 +54,12 @@
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="是否有效">
-                  <a-input
+                  <dict-select
+                    group-code="status"
                     v-decorator="['status',{
-                      rules:[{required:true,message:'请选择是否有效！'}],
-                      initialValue:formData.status
-                    }]"></a-input>
+                      rules:[{required:true,message:'请选择是否有效！'
+                      }]
+                    }]"></dict-select>
                 </a-form-item>
               </a-col>
               <a-col v-bind="col2">
@@ -111,6 +112,7 @@
 <script>
 import { treeList, getOneById, update, deletePermission } from '@/api/system/permission'
 import { Tree as ATree } from 'ant-design-vue'
+import DictSelect from '@/components/DictSelect'
 import AddPermission from './AddPermission'
 export default {
   data () {
@@ -221,7 +223,7 @@ export default {
     this.loadTreeData()
   },
   components: {
-    ATree, AddPermission
+    ATree, AddPermission, DictSelect
   }
 }
 </script>

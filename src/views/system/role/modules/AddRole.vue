@@ -27,11 +27,13 @@
           </a-col>
           <a-col v-bind="col">
             <a-form-item label="状态">
-              <a-input
+              <dict-select
+                default
+                group-code="status"
                 v-decorator="['status',{
                   rules:[{required:true,message:'请选择状态！'
                   }]
-                }]"></a-input>
+                }]"></dict-select>
             </a-form-item>
           </a-col>
           <a-col v-bind="col">
@@ -48,6 +50,7 @@
 
 <script>
 import { addRole, getOne } from '@/api/system/role'
+import DictSelect from '@/components/DictSelect'
 export default {
   data () {
     return {
@@ -86,6 +89,9 @@ export default {
         }
       })
     }
+  },
+  components: {
+    DictSelect
   }
 }
 </script>
