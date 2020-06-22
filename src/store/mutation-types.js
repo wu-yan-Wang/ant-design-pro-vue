@@ -17,3 +17,6 @@ export const CONTENT_WIDTH_TYPE = {
   Fluid: 'Fluid',
   Fixed: 'Fixed'
 }
+
+// 字典
+export const LOAD_DICT = 'LOAD_DICT'

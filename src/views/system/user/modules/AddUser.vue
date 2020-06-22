@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建人员"
+    title="新增人员"
     :width="$enum('modal.width')"
     :visible="visible"
     :confirm-loading="confirmLoading"
@@ -33,7 +33,7 @@
                 v-decorator="['sex', {
                   initialValue:data.sex
                 }]"
-                dictType="sex"
+                group-code="sex"
               ></dict-select>
             </a-form-item>
           </a-col>

@@ -2,7 +2,7 @@
   <a-modal
     :width="$enum('modal.width')"
     :visible="visible"
-    title="修改角色"
+    title="编辑角色"
     @cancel="cancel"
     @ok="handleSumbit"
     :confirm-loading="loading">
@@ -81,7 +81,6 @@ export default {
           updateRole({ ...this.data, ...fields }).then(() => {
             this.$message.success('更新成功！')
             this.cancel()
-            this.form.resetFields()
             this.$emit('ok')
           }).finally(() => {
             this.loading = false

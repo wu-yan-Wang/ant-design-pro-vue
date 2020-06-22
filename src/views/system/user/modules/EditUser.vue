@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建人员"
+    title="编辑人员"
     :width="$enum('modal.width')"
     :visible="visible"
     :confirm-loading="confirmLoading"
@@ -40,7 +40,7 @@
               <dict-select
                 :allowClear="true"
                 v-decorator="['sex']"
-                dictType="sex"
+                group-code="sex"
               ></dict-select>
             </a-form-item>
           </a-col>
@@ -87,14 +87,14 @@ export default {
         this.form.setFieldsValue({
           account: this.data.account,
           name: this.data.name,
-          // sex: this.data.sex,
+          sex: this.data.sex || void 0,
           mobilePhone: this.data.mobilePhone,
           email: this.data.email
         })
-        this.visible = true
       }).finally(() => {
         this.confirmLoading = false
       })
+      this.visible = true
     },
     handleSubmit () {
       this.form.validateFields((err, values) => {
@@ -103,10 +103,10 @@ export default {
           this.confirmLoading = true
           update({ ...this.data, ...values }).then(() => {
             this.$message.success('修改成功！')
-          }).finally(() => {
-            this.confirmLoading = false
             this.$emit('ok')
             this.handleCancel()
+          }).finally(() => {
+            this.confirmLoading = false
           })
         } else {
           this.confirmLoading = false

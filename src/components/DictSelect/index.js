@@ -3,21 +3,13 @@ import { getDictType } from '@/api/system/dict'
 const Option = Select.Option
 export default {
   data () {
-    const value = this.value || undefined
     return {
-      // value
-      dictValue: value,
       // 数据
       dictList: []
     }
   },
-  watch: {
-    value (val) {
-      this.dictValue = val
-    }
-  },
   created () {
-    getDictType({ dictType: this.dictType }).then(({ result }) => {
+    getDictType({ groupCode: this.groupCode }).then(({ result }) => {
       this.dictList = result || []
     })
   },
@@ -26,7 +18,7 @@ export default {
       type: String,
       default: '请选择'
     },
-    dictType: String
+    groupCode: String
   }),
   model: {
     prop: 'value',
@@ -34,6 +26,7 @@ export default {
   },
   methods: {
     change: function (changedValue) {
+      console.log('changedValue', changedValue)
       this.$emit('change', changedValue)
     }
   },
@@ -50,7 +43,7 @@ export default {
       }
     }
     return (
-      <Select onChange={this.change} value={this.dictValue} {...data}>
+      <Select onChange={this.change} {...data}>
         {options}
       </Select>
     )

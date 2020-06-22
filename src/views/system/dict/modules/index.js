@@ -1,6 +1,7 @@
 import CreateDictGroup from '@/views/system/dict/modules/CreateDictGroup'
 import EditorDictGroup from '@/views/system/dict/modules/EditorDictGroup'
-import DictList from '@/views/system/dict/modules/DictList'
+import CreateDict from '@/views/system/dict/modules/CreateDict'
+import EditorDict from '@/views/system/dict/modules/EditorDict'
 export {
-  CreateDictGroup, EditorDictGroup, DictList
+  CreateDict, EditorDict, CreateDictGroup, EditorDictGroup
 }

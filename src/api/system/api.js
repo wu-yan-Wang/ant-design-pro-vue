@@ -8,13 +8,16 @@ export default {
     add: 'system/dict/add',
     update: 'system/dict/update',
     remove: 'system/dict/delete',
-    getDictType: 'system/dict/getDictByType',
+    // 缓存所有字典
+    loadDictCache: 'system/dictGroup/loadDictCache',
+    // 通过字典类型获取字典数据
+    getDictType: 'system/dictGroup/getDictByType',
     // 字典组分页
-    groupPageList: 'system/sysDictGroup/pageList',
-    getDictGroupOne: 'system/sysDictGroup/getOne',
-    addGroupDict: 'system/sysDictGroup/add',
-    updateGroupDict: 'system/sysDictGroup/update',
-    deleteGroupDict: 'system/sysDictGroup/delete'
+    groupPageList: 'system/dictGroup/pageList',
+    getDictGroupOne: 'system/dictGroup/getOne',
+    addGroupDict: 'system/dictGroup/add',
+    updateGroupDict: 'system/dictGroup/update',
+    deleteGroupDict: 'system/dictGroup/delete'
   },
   // 系统用户
   user: {

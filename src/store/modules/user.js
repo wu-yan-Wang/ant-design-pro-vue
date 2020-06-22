@@ -56,7 +56,7 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo ({ commit }) {
+    GetInfo ({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           const result = response.result
@@ -65,6 +65,8 @@ const user = {
             const menus = result.menuList
             // 操作name
             const actions = result.permissionList.map(v => v.permission)
+            // 缓存字典
+            dispatch('dict/LOAD_DICT')
             commit('SET_MENUS', menus)
             commit('SET_INFO', result)
             commit('SET_ACTIONS', actions)

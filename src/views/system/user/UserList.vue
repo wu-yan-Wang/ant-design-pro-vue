@@ -63,6 +63,9 @@
       showPagination="auto"
     >
       <template #serial="text, record,index"><span>{{ index+1 }}</span></template>
+      <template #sex="text">
+        <span>{{ text|dict('sex') }}</span>
+      </template>
       <template #action="text,record">
         <a @click="$refs.addAuth.add(record)">赋权</a>
         <a-divider type="vertical"/>
@@ -115,7 +118,8 @@ export default {
         },
         {
           title: '性别',
-          dataIndex: 'sex'
+          dataIndex: 'sex',
+          scopedSlots: { customRender: 'sex' }
         },
         {
           title: '状态',

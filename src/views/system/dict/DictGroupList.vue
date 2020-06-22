@@ -33,7 +33,7 @@
         <span>{{ index+1 }}</span>
       </template>
       <template #action="text,record">
-        <a href="#" @click="$refs.dict.show()">字典配置</a>
+        <a href="#" @click="$refs.dict.show(record)">字典配置</a>
         <a-divider type="vertical"></a-divider>
         <a href="#" @click="$refs.editor.editor(record)">编辑</a>
         <a-divider type="vertical"></a-divider>
@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { CreateDictGroup, EditorDictGroup, DictList } from './modules'
+import { CreateDictGroup, EditorDictGroup } from './modules'
+import DictList from '@/views/system/dict/DictList'
 import { STable, MorePageSearch } from '@/components'
 import { groupPageList, deleteDictGroup } from '@/api/system/dict'
 export default {

@@ -1,9 +1,9 @@
 <template>
   <a-modal
     :visible="visible"
-    title="新增字典组"
+    title="编辑字典组"
     :width="$enum('modal.width')"
-    :confirm-loading="loading"
+    :confirm-loading="confirmLoading"
     @cancel="cancel"
     @ok="handleSumbit"
   >
@@ -60,6 +60,7 @@ export default {
     return {
       visible: false,
       loading: false,
+      confirmLoading: false,
       form: this.$form.createForm(this),
       gutter: this.$enum('row.gutter'),
       col: this.$enum('row.col2'),
@@ -85,13 +86,14 @@ export default {
       this.form.validateFields((error, fields) => {
         if (!error) {
           this.loading = true
+          this.confirmLoading = true
           updateDictGroup({ ...this.data, ...fields }).then(() => {
             this.$message.success('修改成功！')
             this.cancel()
             this.$emit('ok')
-            this.form.resetFields()
           }).finally(() => {
             this.loading = false
+            this.confirmLoading = false
           })
         }
       })

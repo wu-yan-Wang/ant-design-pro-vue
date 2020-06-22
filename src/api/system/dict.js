@@ -18,6 +18,14 @@ export function pageList (param) {
 }
 
 /**
+ * 查询
+ * @param {Object} parameter
+ */
+export function getOne (parameter) {
+  return axios.post(api.dict.getOne, parameter)
+}
+
+/**
  * 添加
  * @param {Object} params
  */
@@ -47,6 +55,14 @@ export function remove (params) {
  */
 export function groupPageList (parameter) {
   return axios.post(api.dict.groupPageList, parameter)
+}
+
+/**
+ * 缓存所有字典
+ * @param {Object} parameter
+ */
+export function loadDictCache (parameter) {
+  return axios.post(api.dict.loadDictCache, parameter)
 }
 
 /**
