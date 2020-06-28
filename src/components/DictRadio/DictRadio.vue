@@ -19,7 +19,7 @@ export default {
     {
       groupCode: {
         type: String,
-        default: ''
+        required: true
       },
       default: {
         type: Boolean,
@@ -31,14 +31,16 @@ export default {
     event: 'change'
   },
   created () {
-    getDictType({ groupCode: this.groupCode }).then(({ result }) => {
-      this.dictList = result || []
-      if (this.default) {
-        if (this.dictList.length > 0) {
-          this.$emit('change', this.dictList[0].dictValue)
+    if (this.groupCode) {
+      getDictType({ groupCode: this.groupCode }).then(({ result }) => {
+        this.dictList = result || []
+        if (this.default) {
+          if (this.dictList.length > 0) {
+            this.$emit('change', this.dictList[0].dictValue)
+          }
         }
-      }
-    })
+      })
+    }
   }
 }
 </script>

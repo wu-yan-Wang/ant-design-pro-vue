@@ -178,7 +178,7 @@ export default {
         // 查询菜单的数据
         getOneById({ id: this.selectId }).then(res => {
           this.formData = res.result
-          this.iconType = this.formData.permissionIcon
+          this.iconType = this.formData.permissionIcon || 'setting'
           this.form.setFieldsValue({
             permissionCode: this.formData.permissionCode,
             permissionIcon: this.formData.permissionIcon,

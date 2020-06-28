@@ -9,7 +9,12 @@
       </a-col>
       <template #hide-ele>
         <a-col v-bind="searchCol">
-          <a-form-item label="角色状态"><a-input v-model="queryParam.status"></a-input></a-form-item>
+          <a-form-item label="角色状态">
+            <dict-select
+              group-code="status"
+              v-model="queryParam.status">
+            </dict-select>
+          </a-form-item>
         </a-col>
       </template>
       <template #table-btn>
@@ -55,6 +60,7 @@
 <script>
 import { STable, MorePageSearch } from '@/components'
 import { pageList, deleteRole } from '@/api/system/role'
+import DictSelect from '@/components/DictSelect'
 import { PermissionCard, RoleAuth, AddRole, EditRole } from './modules/index'
 export default {
   data () {
@@ -91,7 +97,7 @@ export default {
     }
   },
   components: {
-    STable, PermissionCard, RoleAuth, AddRole, EditRole, MorePageSearch
+    STable, PermissionCard, RoleAuth, AddRole, EditRole, MorePageSearch, DictSelect
   }
 }
 </script>

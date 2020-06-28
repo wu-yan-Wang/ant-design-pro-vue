@@ -20,7 +20,7 @@
       </template>
       <template #table-btn>
         <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
-        <a-button type="ghost" @click="()=>queryParam={}">
+        <a-button style="margin-left: 8px" @click="()=>queryParam={}">
           重置
         </a-button>
       </template>
