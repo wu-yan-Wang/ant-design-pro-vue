@@ -20,6 +20,8 @@ const permission = {
       return new Promise(resolve => {
         const { menus } = data
         generatorDynamicRouter(menus).then(routers => {
+          console.log(JSON.stringify(routers))
+
           commit('SET_ROUTERS', routers)
           resolve()
         })

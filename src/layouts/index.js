@@ -1,7 +1,7 @@
-import UserLayout from './UserLayout'
-import BlankLayout from './BlankLayout'
-import BasicLayout from './BasicLayout'
-import RouteView from './RouteView'
-import PageView from './PageView'
+import UserLayout from '@/layouts/UserLayout'
+import BlankLayout from '@/layouts/BlankLayout'
+import BasicLayout from '@/layouts/BasicLayout'
+import RouteView from '@/layouts/RouteView'
+import PageView from '@/layouts/PageView'
 
 export { UserLayout, BasicLayout, BlankLayout, RouteView, PageView }

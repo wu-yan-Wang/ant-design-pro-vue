@@ -31,6 +31,7 @@ import ArticleListContent from '@/components/ArticleListContent'
 
 // my custom
 import MorePageSearch from '@/components/MorePageSearch'
+import PreviewIcons from '@/components/PreviewIcons'
 export {
   AvatarList,
   Bar,
@@ -61,6 +62,6 @@ export {
   TagSelect,
   StandardFormRow,
   ArticleListContent,
-  MorePageSearch
-
+  MorePageSearch,
+  PreviewIcons
 }
