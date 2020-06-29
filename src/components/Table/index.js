@@ -194,6 +194,7 @@ export default {
      * @param selectedRows
      */
     updateSelect (selectedRowKeys, selectedRows) {
+      debugger
       this.$emit('update:selectedRowKeys', selectedRowKeys)
       this._events.rowChange && (this.$emit('rowChange', selectedRowKeys, selectedRows))
       const list = this.needTotalList

@@ -42,17 +42,6 @@
         icon="plus"
         @click="$refs.createModal.add()"
       >新建</a-button>
-      <a-dropdown>
-        <a-menu slot="overlay">
-          <!-- lock | unlock -->
-          <a-menu-item key="2">
-            <a-icon type="lock" />启用</a-menu-item>
-        </a-menu>
-        <a-button style="margin-left: 8px">
-          批量操作
-          <a-icon type="down" />
-        </a-button>
-      </a-dropdown>
     </div>
     <s-table
       ref="table"

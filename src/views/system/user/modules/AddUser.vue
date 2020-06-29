@@ -27,22 +27,32 @@
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
-            <a-form-item label="性别">
+            <a-form-item label="状态">
               <dict-select
-                :allowClear="true"
-                v-decorator="['sex', {
-                  initialValue:data.sex
-                }]"
-                group-code="sex"
+                v-decorator="['status',{
+                  initialValue:'1'
+                  ,rules:[{
+                    required:true,message:'请选择状态'
+                  }]}]"
+                group-code="status"
               ></dict-select>
             </a-form-item>
           </a-col>
+
           <a-col v-bind="col3">
             <a-form-item label="手机号">
               <a-input
                 v-decorator="['mobilePhone',{
                   rules: [{required: true, max: 11,pattern:$enum('form.rule.phone') ,message: '请输入正确的手机号！'}]
                 }]" />
+            </a-form-item>
+          </a-col>
+          <a-col v-bind="col3">
+            <a-form-item label="性别">
+              <dict-select
+                v-decorator="['sex']"
+                group-code="sex"
+              ></dict-select>
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
@@ -68,8 +78,7 @@ export default {
       visible: false,
       confirmLoading: false,
       form: this.$form.createForm(this),
-      col3: this.$enum('row.col2'),
-      data: {}
+      col3: this.$enum('row.col2')
     }
   },
   created () {

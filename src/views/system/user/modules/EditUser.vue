@@ -36,11 +36,13 @@
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
-            <a-form-item label="性别">
+            <a-form-item label="状态">
               <dict-select
-                :allowClear="true"
-                v-decorator="['sex']"
-                group-code="sex"
+                v-decorator="['status',{
+                  rules:[{
+                    required:true,message:'请选择状态'
+                  }]}]"
+                group-code="status"
               ></dict-select>
             </a-form-item>
           </a-col>
@@ -50,6 +52,15 @@
                 v-decorator="['mobilePhone',{
                   rules: [{required: true, max: 11,pattern:$enum('form.rule.phone') ,message: '请输入正确的手机号！'}]
                 }]" />
+            </a-form-item>
+          </a-col>
+          <a-col v-bind="col3">
+            <a-form-item label="性别">
+              <dict-select
+                :allowClear="true"
+                v-decorator="['sex']"
+                group-code="sex"
+              ></dict-select>
             </a-form-item>
           </a-col>
           <a-col v-bind="col3">
@@ -88,6 +99,7 @@ export default {
           account: this.data.account,
           name: this.data.name,
           sex: this.data.sex || void 0,
+          status: this.data.status,
           mobilePhone: this.data.mobilePhone,
           email: this.data.email
         })
