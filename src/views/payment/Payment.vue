@@ -18,7 +18,7 @@
         {{ index+1 }}
       </span>
     </s-table>
-    <user-import @ok="$refs.table.refresh()" ref="import"></user-import>
+    <user-import @ok="$refs.table.refresh(true)" ref="import"></user-import>
   </a-card>
 </template>
 

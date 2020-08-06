@@ -1,10 +1,31 @@
 <template>
-  <a-modal :visible="visible" title="导入用户" @cancel="handleCancel" @ok="handleUpload" :confirmLoading="confirmLoading">
-    <a-row type="flex" justify="center">
-      <a-col v-bind="col1"><a-button type="primary" icon="download" @click="download">下载模板</a-button></a-col>
+  <a-modal
+    :visible="visible"
+    title="导入用户"
+    @cancel="handleCancel"
+    @ok="handleUpload"
+    :confirmLoading="confirmLoading"
+  >
+    <a-row
+      type="flex"
+      justify="center"
+    >
       <a-col v-bind="col1">
-        <a-upload name="file" :fileList="fileList" accept=".xlsx" :before-upload="beforeUpload">
-          <a-button> <a-icon type="upload" /> 上传文件 </a-button>
+        <a-button
+          type="primary"
+          icon="download"
+          @click="download"
+        >下载模板</a-button>
+      </a-col>
+      <a-col v-bind="col1">
+        <a-upload
+          name="file"
+          :fileList="fileList"
+          accept=".xlsx"
+          :before-upload="beforeUpload"
+        >
+          <a-button>
+            <a-icon type="upload" /> 上传文件 </a-button>
         </a-upload>
       </a-col>
     </a-row>
@@ -31,7 +52,7 @@ export default {
     },
     download () {
       const a = document.createElement('a')
-      a.href = '/shop/public/importUser.xlsx'
+      a.href = '/shop/public/导入模板.xlsx'
       a.click()
     },
     beforeUpload (file) {
@@ -51,6 +72,7 @@ export default {
               this.$message.error(result.result)
             } else {
               this.$message.success('上传成功！')
+              this.fileList = []
               this.handleCancel()
               this.$emit('ok')
             }
@@ -71,5 +93,4 @@ export default {
 </script>
 
 <style>
-
 </style>

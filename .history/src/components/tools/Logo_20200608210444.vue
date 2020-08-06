@@ -1,0 +1,31 @@
+<template>
+  <div class="logo">
+    <!-- <router-link :to="{name:'dashboard'}"> -->
+    <logo-svg alt="logo" />
+    <h1 v-if="showTitle">{{ title }}</h1>
+    <!-- </router-link> -->
+  </div>
+</template>
+
+<script>
+import LogoSvg from '@/assets/wuyan.svg?inline'
+
+export default {
+  name: 'Logo',
+  components: {
+    LogoSvg
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'Wu Yan Admin',
+      required: false
+    },
+    showTitle: {
+      type: Boolean,
+      default: true,
+      required: false
+    }
+  }
+}
+</script>
