@@ -28,6 +28,7 @@ const assetsCDN = {
 
 // vue.config.js
 const vueConfig = {
+  publicPath: '/payment-admin/',
   configureWebpack: {
     // webpack plugins
     plugins: [
