@@ -37,13 +37,31 @@
       <template #status="text">
         {{ text==0?'未激活':text==1?'已激活':text==2?'已暂停':text==3?'已重启':'无' }}
       </template>
+      <template #action="text,record">
+        <a
+          href="javascript:0"
+          @click="active(record)"
+          v-if="record.status==0"
+        >激活</a>
+        <a
+          href="javascript:0"
+          @click="pause(record)"
+          v-else-if="record.status==1"
+        >暂停</a>
+        <a
+          href="javascript:0"
+          @click="restart(record)"
+          v-else-if="record.status==2"
+        >重启</a>
+        <span v-else>--</span>
+      </template>
     </s-table>
   </a-card>
 </template>
 
 <script>
 import { STable } from '@/components'
-import { getStocks } from '@/api/shopImport'
+import { getStocks, activeStocks, pauseStocks, restartStocks } from '@/api/shopImport'
 export default {
   data () {
     return {
@@ -54,7 +72,7 @@ export default {
           width: 50,
           scopedSlots: { customRender: 'serial' }
         },
-        , {
+        {
           title: '券批次号',
           width: 300,
           dataIndex: 'imBatchNo'
@@ -142,6 +160,11 @@ export default {
           title: '重启时间',
           width: 150,
           dataIndex: 'restartDate'
+        }, {
+          title: '操作',
+          width: 200,
+          dataIndex: 'id',
+          scopedSlots: { customRender: 'action' }
         }
       ],
       // 加载数据方法 必须为 Promise 对象
@@ -158,6 +181,33 @@ export default {
     }
   },
   methods: {
+    active (record) {
+      activeStocks({ id: record.id }).then((res) => {
+        if (res.code == 1) {
+          this.$message.success(res.data);
+        } else {
+          this.$message.error(res.message);
+        }
+      });
+    },
+    pause (record) {
+      pauseStocks({ id: record.id }).then((res) => {
+        if (res.code == 1) {
+          this.$message.success(res.data)
+        } else {
+          this.$message.error(res.message)
+        }
+      })
+    },
+    restart (record) {
+      restartStocks({ id: record.id }).then((res) => {
+        if (res.code == 1) {
+          this.$message.success(res.data)
+        } else {
+          this.$message.error(res.message)
+        }
+      })
+    }
   },
   components: {
     STable

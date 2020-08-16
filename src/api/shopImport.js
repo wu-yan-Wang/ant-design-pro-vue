@@ -14,3 +14,27 @@ export function getImportMsgByBatchNo (parameter) {
 export function getStocks (parameter) {
   return axios.post('/importExcel/getStocks', parameter)
 }
+
+/**
+ * 激活
+ * @param {*} parameter
+ */
+export function activeStocks (parameter) {
+  return axios.post('/importExcel/activeStocks', parameter)
+}
+
+/**
+ * 暂停
+ * @param {*} parameter
+ */
+export function pauseStocks (parameter) {
+  return axios.post('/importExcel/pauseStocks', parameter)
+}
+
+/**
+ * 重启
+ * @param {*} parameter
+ */
+export function restartStocks (parameter) {
+  return axios.post('/importExcel/restartStocks', parameter)
+}
