@@ -14,7 +14,10 @@
             </a-form-item>
           </a-col>
           <a-col span="12">
-            <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
+            <a-button
+              type="primary"
+              @click="$refs.table.refresh(true)"
+            >查询</a-button>
           </a-col>
         </a-row>
       </a-form>
@@ -29,14 +32,23 @@
       :scroll="{ x: 1300 }"
     >
       <template #serial="text, record,index">{{ index + 1 }}</template>
-      <template
-        #status="text"
-      >{{ text == 0 ? '未激活' : text == 1 ? '已激活' : text == 2 ? '已暂停' : text == 3 ? '已重启' : '无' }}</template>
+      <template #status="text">{{ text == 0 ? '未激活' : text == 1 ? '已激活' : text == 2 ? '已暂停' : text == 3 ? '已重启' : '无' }}</template>
       <template #action="text,record">
-        <a href="javascript:0" @click="active(record)" v-if="record.status == 0">激活</a>
-        <a href="javascript:0" @click="pause(record)" v-else-if="record.status == 1">暂停</a>
-        <a href="javascript:0" @click="restart(record)" v-else-if="record.status == 2">重启</a>
-        <span v-else>--</span>
+        <a
+          href="javascript:0"
+          @click="active(record)"
+          v-if="record.currState == 0"
+        >激活</a>
+        <a
+          href="javascript:0"
+          @click="pause(record)"
+          v-else-if="record.currState == 1||record.currState == 3"
+        >暂停</a>
+        <a
+          href="javascript:0"
+          @click="restart(record)"
+          v-else-if="record.currState == 2"
+        >重启</a>
       </template>
     </s-table>
   </a-card>
