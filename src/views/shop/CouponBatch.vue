@@ -9,15 +9,12 @@
             </a-form-item>
           </a-col>
           <a-col span="6">
-            <a-form-item label="卷批次号">
+            <a-form-item label="券批次号">
               <a-input v-model="queryParam.imBatchNo"></a-input>
             </a-form-item>
           </a-col>
           <a-col span="12">
-            <a-button
-              type="primary"
-              @click="$refs.table.refresh(true)"
-            >查询</a-button>
+            <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
           </a-col>
         </a-row>
       </a-form>
@@ -25,34 +22,20 @@
     <s-table
       ref="table"
       size="default"
-      :rowKey="item=>item.id"
+      :rowKey="item => item.id"
       :columns="columns"
       :data="loadData"
       showPagination="auto"
       :scroll="{ x: 1300 }"
     >
-      <template #serial="text, record,index">
-        {{ index+1 }}
-      </template>
-      <template #status="text">
-        {{ text==0?'未激活':text==1?'已激活':text==2?'已暂停':text==3?'已重启':'无' }}
-      </template>
+      <template #serial="text, record,index">{{ index + 1 }}</template>
+      <template
+        #status="text"
+      >{{ text == 0 ? '未激活' : text == 1 ? '已激活' : text == 2 ? '已暂停' : text == 3 ? '已重启' : '无' }}</template>
       <template #action="text,record">
-        <a
-          href="javascript:0"
-          @click="active(record)"
-          v-if="record.status==0"
-        >激活</a>
-        <a
-          href="javascript:0"
-          @click="pause(record)"
-          v-else-if="record.status==1"
-        >暂停</a>
-        <a
-          href="javascript:0"
-          @click="restart(record)"
-          v-else-if="record.status==2"
-        >重启</a>
+        <a href="javascript:0" @click="active(record)" v-if="record.status == 0">激活</a>
+        <a href="javascript:0" @click="pause(record)" v-else-if="record.status == 1">暂停</a>
+        <a href="javascript:0" @click="restart(record)" v-else-if="record.status == 2">重启</a>
         <span v-else>--</span>
       </template>
     </s-table>
@@ -76,7 +59,8 @@ export default {
           title: '券批次号',
           width: 300,
           dataIndex: 'imBatchNo'
-        }, {
+        },
+        {
           title: '商家名称',
           width: 150,
           dataIndex: 'shopName'
@@ -115,7 +99,8 @@ export default {
           title: '当天发放总上限',
           width: 150,
           dataIndex: 'maxAmountByDay'
-        }, {
+        },
+        {
           title: '单个用户可领取个数',
           width: 170,
           dataIndex: 'maxCouponsPerUser'
@@ -124,7 +109,8 @@ export default {
           title: '券面额',
           width: 150,
           dataIndex: 'couponAmount'
-        }, {
+        },
+        {
           title: '券门槛',
           width: 150,
           dataIndex: 'transactionMinimum'
@@ -138,20 +124,24 @@ export default {
           title: '可核销商户号',
           width: 150,
           dataIndex: 'availableMerchants'
-        }, {
+        },
+        {
           title: '商户流水号',
           width: 300,
           dataIndex: 'outRequestNo'
-        }, {
+        },
+        {
           title: '状态',
           width: 150,
           scopedSlots: { customRender: 'status' },
           dataIndex: 'currState'
-        }, {
+        },
+        {
           title: '激活时间',
           width: 150,
           dataIndex: 'activeDate'
-        }, {
+        },
+        {
           title: '暂停时间',
           width: 150,
           dataIndex: 'pauseDate'
@@ -160,7 +150,8 @@ export default {
           title: '重启时间',
           width: 150,
           dataIndex: 'restartDate'
-        }, {
+        },
+        {
           title: '操作',
           width: 200,
           dataIndex: 'id',
@@ -168,11 +159,10 @@ export default {
         }
       ],
       // 加载数据方法 必须为 Promise 对象
-      loadData: parameter => {
-        return getStocks(Object.assign(parameter, this.queryParam))
-          .then(res => {
-            return res.result
-          })
+      loadData: (parameter) => {
+        return getStocks(Object.assign(parameter, this.queryParam)).then((res) => {
+          return res.result
+        })
       },
       queryParam: {
         imBatchNo: '',
@@ -183,16 +173,16 @@ export default {
   methods: {
     active (record) {
       activeStocks({ id: record.id }).then((res) => {
-        if (res.code == 1) {
-          this.$message.success(res.data);
+        if (res.code === 1) {
+          this.$message.success(res.data)
         } else {
-          this.$message.error(res.message);
+          this.$message.error(res.message)
         }
-      });
+      })
     },
     pause (record) {
       pauseStocks({ id: record.id }).then((res) => {
-        if (res.code == 1) {
+        if (res.code === 1) {
           this.$message.success(res.data)
         } else {
           this.$message.error(res.message)
@@ -201,7 +191,7 @@ export default {
     },
     restart (record) {
       restartStocks({ id: record.id }).then((res) => {
-        if (res.code == 1) {
+        if (res.code === 1) {
           this.$message.success(res.data)
         } else {
           this.$message.error(res.message)
@@ -215,5 +205,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
