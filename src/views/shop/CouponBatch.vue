@@ -186,7 +186,8 @@ export default {
     active (record) {
       activeStocks({ id: record.id }).then((res) => {
         if (res.code === 1) {
-          this.$message.success(res.data)
+          this.$message.success(res.result)
+          this.$refs.table.refresh()
         } else {
           this.$message.error(res.message)
         }
@@ -195,7 +196,8 @@ export default {
     pause (record) {
       pauseStocks({ id: record.id }).then((res) => {
         if (res.code === 1) {
-          this.$message.success(res.data)
+          this.$message.success(res.result)
+          this.$refs.table.refresh()
         } else {
           this.$message.error(res.message)
         }
@@ -204,7 +206,8 @@ export default {
     restart (record) {
       restartStocks({ id: record.id }).then((res) => {
         if (res.code === 1) {
-          this.$message.success(res.data)
+          this.$message.success(res.result)
+          this.$refs.table.refresh()
         } else {
           this.$message.error(res.message)
         }
