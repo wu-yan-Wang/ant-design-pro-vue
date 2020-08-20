@@ -20,7 +20,7 @@ export function getStocks (parameter) {
  * @param {*} parameter
  */
 export function activeStocks (parameter) {
-  return axios.post('/importExcel/activeStocks', parameter)
+  return axios.post('/importExcel/activeStocks?id=' + parameter.id)
 }
 
 /**
@@ -28,7 +28,7 @@ export function activeStocks (parameter) {
  * @param {*} parameter
  */
 export function pauseStocks (parameter) {
-  return axios.post('/importExcel/pauseStocks', parameter)
+  return axios.post('/importExcel/pauseStocks?id=' + parameter.id)
 }
 
 /**
@@ -36,5 +36,5 @@ export function pauseStocks (parameter) {
  * @param {*} parameter
  */
 export function restartStocks (parameter) {
-  return axios.post('/importExcel/restartStocks', parameter)
+  return axios.post('/importExcel/restartStocks?id=' + parameter.id)
 }
