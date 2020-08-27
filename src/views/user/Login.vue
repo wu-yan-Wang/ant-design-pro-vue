@@ -42,6 +42,18 @@
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
+          <a-row :gutter="16">
+            <a-col :span="16">
+              <a-form-item>
+                <a-input size="large" type="text" placeholder="验证码" v-decorator="['captcha', {rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur'}]">
+                  <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
+                </a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :span="8">
+              <img style="height:40px;width:128px;" @click="captchaClick" :src="captchaSrc" />
+            </a-col>
+          </a-row>
         </a-tab-pane>
         <a-tab-pane key="tab2" tab="手机号登录">
           <a-form-item>
@@ -72,7 +84,7 @@
       </a-tabs>
 
       <a-form-item>
-        <a-checkbox v-decorator="['rememberMe']">自动登录</a-checkbox>
+        <a-checkbox v-decorator="['rememberMe']" >自动登录</a-checkbox>
         <router-link
           :to="{ name: 'recover', params: { user: 'aaa'} }"
           class="forge-password"
@@ -121,6 +133,7 @@ import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
 // import { getSmsCaptcha, get2step } from '@/api/login'
 
+const captchaUrl = `${process.env.VUE_APP_API_BASE_URL}/captcha`
 export default {
   components: {
     // TwoStepCaptcha
@@ -141,7 +154,8 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      captchaSrc: captchaUrl
     }
   },
   created () {
@@ -235,6 +249,9 @@ export default {
           // })
         }
       })
+    },
+    captchaClick () {
+      this.captchaSrc = `${captchaUrl}?date=${new Date()}`
     },
     stepCaptchaSuccess () {
       this.loginSuccess()
