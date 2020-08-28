@@ -56,7 +56,8 @@
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="菜单编码">
-                  <a-input v-decorator="[
+                  <a-input
+                    v-decorator="[
                       'permissionCode',
                       {
                         rules: [{ required: true, message: '请输入菜单编码！' }],
@@ -67,7 +68,8 @@
               </a-col>
               <a-col v-bind="col2">
                 <a-form-item label="菜单名称">
-                  <a-input v-decorator="[
+                  <a-input
+                    v-decorator="[
                       'permissionName',
                       {
                         rules: [{ required: true, message: '请输入菜单名称！' }],
@@ -95,7 +97,8 @@
                 v-if="eleVisible"
               >
                 <a-form-item label="菜单url">
-                  <a-input v-decorator="[
+                  <a-input
+                    v-decorator="[
                       'permissionUrl',
                       {
                         initialValue: '',
@@ -109,7 +112,8 @@
                 v-if="eleVisible"
               >
                 <a-form-item label="菜单组件">
-                  <a-input v-decorator="[
+                  <a-input
+                    v-decorator="[
                       'component',
                       {
                         initialValue: '',
@@ -123,7 +127,8 @@
                   label="菜单权限"
                   v-if="!eleVisible"
                 >
-                  <a-input v-decorator="[
+                  <a-input
+                    v-decorator="[
                       'permission',
                       {
                         initialValue: '',

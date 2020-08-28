@@ -155,6 +155,7 @@ export default {
         loginType: 0,
         smsSendBtn: false
       },
+      captcha: '',
       captchaSrc: captchaUrl
     }
   },
@@ -196,7 +197,7 @@ export default {
 
       state.loginBtn = true
 
-      const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha']
+      const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password', 'captcha'] : ['mobile', 'captcha']
 
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
@@ -204,7 +205,7 @@ export default {
           delete loginParams.username
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
           Login(loginParams)
-            .then((res) => this.loginSuccess(res))
+            .then((res) => this.loginSuccess(res)).catch(() => this.captchaClick())
             // .catch(err => this.requestFailed(err))
             .finally(() => {
               state.loginBtn = false
@@ -212,6 +213,7 @@ export default {
         } else {
           setTimeout(() => {
             state.loginBtn = false
+            this.captchaClick()
           }, 600)
         }
       })
