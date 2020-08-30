@@ -13,11 +13,17 @@
               <a-input v-model="queryParam.imBatchNo"></a-input>
             </a-form-item>
           </a-col>
-          <a-col span="12">
+          <a-col span="2">
             <a-button
               type="primary"
               @click="$refs.table.refresh(true)"
             >查询</a-button>
+          </a-col>
+          <a-col span="2">
+            <a-button
+              type="primary"
+              @click="download"
+            >二维码</a-button>
           </a-col>
         </a-row>
       </a-form>
@@ -49,14 +55,18 @@
           @click="restart(record)"
           v-else-if="record.currState == 2"
         >重启</a>
-      </template>
+        <a-divider type="vertical"></a-divider>
+        <a
+          href="javascript:0"
+          @click="openLocation(record)" >{{ record.isOpenGps?'关闭定位':'开启定位' }}
+        </a></template>
     </s-table>
   </a-card>
 </template>
 
 <script>
 import { STable } from '@/components'
-import { getStocks, activeStocks, pauseStocks, restartStocks } from '@/api/shopImport'
+import { getStocks, activeStocks, pauseStocks, restartStocks, updateIsOpenGps } from '@/api/shopImport'
 export default {
   data () {
     return {
@@ -212,6 +222,24 @@ export default {
           this.$message.error(res.message)
         }
       })
+    },
+    openLocation (record) {
+      if (!record.shopId) {
+        this.$message.error('没有对应的商户！')
+      }
+      updateIsOpenGps({ shopId: record.shopId, isOpenGps: record.isOpenGps ? '0' : '1' }).then(res => {
+        if (res.code === 1) {
+          this.$message.success(res.result)
+          this.$refs.table.refresh()
+        } else {
+          this.$message.error(res.message)
+        }
+      })
+    },
+    download () {
+      const a = document.createElement('a')
+      a.href = '/shop/wechat/menu/creatQrCode'
+      a.click()
     }
   },
   components: {

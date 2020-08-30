@@ -38,3 +38,12 @@ export function pauseStocks (parameter) {
 export function restartStocks (parameter) {
   return axios.post('/importExcel/restartStocks?id=' + parameter.id)
 }
+
+/**
+ * 开启定位
+ * @param {*}
+ */
+export function updateIsOpenGps (params) {
+  console.log(params)
+  return axios.post('/userReceive/updateIsOpenGps', params)
+};
