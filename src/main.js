@@ -17,11 +17,14 @@ import './core/lazy_use'
 import './permission' // permission control
 import './utils/filter' // global filter
 import './components/global.less'
+import themePluginConfig from '../config/themePluginConfig'
 
 Vue.config.productionTip = false
 
 // mount axios Vue.$http and this.$http
 Vue.use(VueAxios)
+
+window.umi_plugin_ant_themeVar = themePluginConfig.theme
 
 new Vue({
   router,

@@ -74,7 +74,7 @@ const user = {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
           commit('SET_NAME', { name: result.name, welcome: welcome() })
-          commit('SET_AVATAR', result.avatar)
+          commit('SET_AVATAR', result.avatar || 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')
 
           resolve(response)
         }).catch(error => {
