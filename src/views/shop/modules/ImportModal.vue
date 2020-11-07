@@ -52,7 +52,7 @@ export default {
     },
     download () {
       const a = document.createElement('a')
-      a.href = '/shop/excel/import.xlsx'
+      a.href = '/plus/excel/import.xlsx'
       a.click()
     },
     beforeUpload (file) {

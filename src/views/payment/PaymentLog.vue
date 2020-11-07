@@ -90,7 +90,7 @@ export default {
     },
     exportExcel () {
       const a = document.createElement('a')
-      a.href = `/shop/payment-log/exportExcel?startDate=${this.queryParam.startDate}&endDate=${this.queryParam.endDate}`
+      a.href = `/plus/payment-log/exportExcel?startDate=${this.queryParam.startDate}&endDate=${this.queryParam.endDate}`
       a.target = '_self'
       a.click()
     }

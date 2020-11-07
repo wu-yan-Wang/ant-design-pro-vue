@@ -73,20 +73,16 @@
       </span>
     </s-table>
 
-    <role-modal ref="modal" @ok="handleOk"></role-modal>
-
   </a-card>
 </template>
 
 <script>
 import { STable } from '@/components'
-import RoleModal from './modules/RoleModal'
 
 export default {
   name: 'TableList',
   components: {
-    STable,
-    RoleModal
+    STable
   },
   data () {
     return {

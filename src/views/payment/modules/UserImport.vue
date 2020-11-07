@@ -52,7 +52,7 @@ export default {
     },
     download () {
       const a = document.createElement('a')
-      a.href = '/shop/public/导入模板.xlsx'
+      a.href = '/plus/public/导入模板.xlsx'
       a.click()
     },
     beforeUpload (file) {

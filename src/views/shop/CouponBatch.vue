@@ -238,7 +238,7 @@ export default {
     },
     download () {
       const a = document.createElement('a')
-      a.href = '/shop/wechat/menu/creatQrCode'
+      a.href = '/plus/wechat/menu/creatQrCode'
       a.click()
     }
   },
