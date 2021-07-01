@@ -93,10 +93,9 @@ const vueConfig = {
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     proxy: {
       '/springboot-admin': {
-        target: 'http://localhost:8090/springboot-admin',
+        target: 'http://localhost:8090',
         ws: false,
-        changeOrigin: true,
-        pathRewrite: { '^/springboot-admin': '' }
+        changeOrigin: true
       }
     }
   },

@@ -15,7 +15,7 @@ const service = axios.create({
   }
 })
 
-const err = (error) => {
+const err = error => {
   console.log(error)
 
   if (error.response) {
@@ -56,14 +56,8 @@ service.interceptors.request.use(config => {
 }, err)
 
 // response interceptor
-service.interceptors.response.use((response) => {
+service.interceptors.response.use(response => {
   const data = response.data
-  if (data.code === 0) {
-    notification.error({
-      message: data.message,
-      description: data.result
-    })
-  }
   return data
 }, err)
 
@@ -74,7 +68,4 @@ const installer = {
   }
 }
 
-export {
-  installer as VueAxios,
-  service as axios
-}
+export { installer as VueAxios, service as axios }
